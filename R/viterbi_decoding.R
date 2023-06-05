@@ -15,8 +15,7 @@ viterbi_decoding <- function(ssf_formula,
                              tpm_formula,
                              data,
                              fit,
-                             n_states,
-                             dist = "gamma") {
+                             n_states) {
 
   # get observed locations
   obs <- subset(data, obs == 1)
@@ -35,7 +34,7 @@ viterbi_decoding <- function(ssf_formula,
   ssf_LP <- ssf_MM %*% betas
 
   # get sampling densities
-  sampling_densities <- sampling_dens(data, dist = dist, dist_par = NULL)
+  sampling_densities <- attr(data, "weights")
 
   # get state-dependent densities
   densities <- state_dens_rcpp(linear_pred = ssf_LP,

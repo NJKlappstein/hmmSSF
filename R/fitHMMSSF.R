@@ -16,7 +16,6 @@ fitHMMSSF <- function(ssf_formula,
                       data,
                       par0,
                       n_states,
-                      dist = "gamma",
                       optim_opts = list(trace = 0, maxit = 5e4)) {
 
   # get vector of parameters
@@ -32,7 +31,7 @@ fitHMMSSF <- function(ssf_formula,
   ssf_MM <- ssf_MM[,!colnames(ssf_MM) == "(Intercept)"]
 
   # get sampling densities for correction
-  sampling_densities <- sampling_dens(data, dist)
+  sampling_densities <- attr(data, "weights")
 
   # get transition probabilities model matrix
   options(na.action = 'na.pass')
