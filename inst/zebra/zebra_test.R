@@ -1,8 +1,8 @@
 library(hmmSSF)
 
 # load data
-data <- readRDS("inst/zebra_processed.RData")
-initial_par <- readRDS("inst/initial_par.RData")
+data <- readRDS("inst/zebra/zebra_processed.RData")
+initial_par <- readRDS("inst/zebra/initial_par.RData")
 initial_par <- initial_par[[3]]
 
 # model settings
