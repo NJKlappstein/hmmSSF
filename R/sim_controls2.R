@@ -29,14 +29,14 @@ sim_controls2 <- function(obs, n_controls, dist = "uniform")
     # Loop over observed steps
     data_list <- lapply(3:n_obs, function(i) {
       # Simulate step lengths and turning angles for random steps
-      sim_step <- setup$r_step(n = n_zeros, par = setup$par_step)
-      sim_angle <- setup$r_angle(n = n_zeros, par = setup$par_angle)
+      sim_step <- setup$r_step(n = n_controls, par = setup$par_step)
+      sim_angle <- setup$r_angle(n = n_controls, par = setup$par_angle)
       # Importance weights
       weights <- setup$d_step(x = sim_step, par = setup$par_step) *
         setup$d_angle(x = sim_angle, par = setup$par_angle)
       # Derive coordinates of random points
       sim_bear <- bears[i-2] + sim_angle
-      pts <- rep(xy[i-1,], each = n_zeros) +
+      pts <- rep(xy[i-1,], each = n_controls) +
         sim_step * cbind(cos(sim_bear), sin(sim_bear))
 
       data.frame(x = c(xy[i,1], pts[,1]),
@@ -44,7 +44,7 @@ sim_controls2 <- function(obs, n_controls, dist = "uniform")
                  step = c(steps[i-1], sim_step),
                  angle = c(angles[i-2], sim_angle),
                  stratum = i,
-                 obs = c(1, rep(0, n_zeros)),
+                 obs = c(1, rep(0, n_controls)),
                  ID = id,
                  w = c(NA, weights))
     })

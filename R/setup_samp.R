@@ -1,7 +1,7 @@
 
 #' Setup importance sampling distributions
 setup_samp <- function(dist = "uniform", obs) {
-  move_data <- moveHMM::prepData(obs)
+  move_data <- moveHMM::prepData(obs, type = "UTM")
   step <- na.omit(move_data$step)
   angle <- na.omit(move_data$angle)
 
@@ -39,6 +39,8 @@ setup_samp <- function(dist = "uniform", obs) {
   if(length(dist) == 1) {
     # By default, uniform distribution of turning angles
     r_angle <- function(n, par) runif(n, -pi, pi)
+    d_angle <- function(x, par) 1
+    par_angle <- NA
   } else if(length(dist) == 2) {
     if(dist[2] == "vm") {
       par_angle <- unlist(CircStats::vm.ml(angle))
