@@ -1,11 +1,16 @@
 Package: hmmSSF
 Type: Package
-Title: What the Package Does (Title Case)
+Title: State-switching step selection functions
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: NJ Klappstein, T Michelot
+Maintainer: NJ Klappstein <nklappstein@dal.ca>
+Description: Fit state-switching step selection functions to animal movement data
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Depends:
+  Rcpp
+LinkingTo:
+  Rcpp, 
+  RcppArmadillo
+RoxygenNote: 7.2.3
