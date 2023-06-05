@@ -16,7 +16,6 @@ fitHMMSSF <- function(ssf_formula,
                       data,
                       par0,
                       n_states,
-                      dist = "gamma",
                       optim_opts = list(trace = 0, maxit = 5e4)) {
 
   # get vector of parameters
@@ -32,7 +31,7 @@ fitHMMSSF <- function(ssf_formula,
   ssf_MM <- ssf_MM[,!colnames(ssf_MM) == "(Intercept)"]
 
   # get sampling densities for correction
-  sampling_densities <- sampling_dens(data, dist)
+  sampling_densities <- attr(data, "weights")
 
   # get transition probabilities model matrix
   options(na.action = 'na.pass')
@@ -55,9 +54,7 @@ fitHMMSSF <- function(ssf_formula,
                n_ssf_cov = n_ssf_cov,
                n_obs = nrow(obs),
                control = optim_opts,
-               hessian = T)
-
-  neg_llk <- fit$value
+               hessian = TRUE)
 
   # unpack, back-transform, and get CIs of fitted parameters
   par_CI <- hessian_CI(fit = fit,
@@ -65,10 +62,17 @@ fitHMMSSF <- function(ssf_formula,
                        ssf_MM = ssf_MM,
                        tpm_MM = tpm_MM)
 
-  # add convergence information
-  par_CI$convergence <- fit$convergence
-  par_CI$nllk <- neg_llk
-  par_CI$hessian <- fit$hessian
+  # Save model formulation in model object
+  args <- list(tpm_formula = tpm_formula,
+               ssf_formula = ssf_formula,
+               data = data,
+               n_states = n_states)
 
-  return(par_CI)
+  # Returned object
+  mod <- list(par_CI = par_CI,
+              fit = fit,
+              args = args)
+  class(mod) <- append("hmmSSF", class(mod))
+
+  return(mod)
 }
