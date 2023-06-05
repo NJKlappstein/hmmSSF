@@ -10,7 +10,6 @@ fitHMMSSF(
   data,
   par0,
   n_states,
-  dist = "gamma",
   optim_opts = list(trace = 0, maxit = 50000)
 )
 }
@@ -23,9 +22,9 @@ fitHMMSSF(
 
 \item{n_states}{how many states in the model}
 
-\item{dist}{distribution of the controls (default = "gamma", also "uniform")}
-
 \item{tmp_formula}{formula for transition probabilities (default = ~1)}
+
+\item{dist}{distribution of the controls (default = "gamma", also "uniform")}
 }
 \description{
 Fit the HMM-SSF

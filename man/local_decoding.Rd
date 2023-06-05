@@ -5,7 +5,7 @@
 \title{Local decoding using the forward-backward algorithm
 (modified from hmmTMB function 'HMM$state_probs')}
 \usage{
-local_decoding(ssf_formula, tpm_formula, data, fit, n_states, dist = "gamma")
+local_decoding(mod)
 }
 \arguments{
 \item{ssf_formula}{SSF formula of the HMM-SSF}

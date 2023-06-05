@@ -5,7 +5,7 @@
 \title{Generate most probable state sequence using the viterbi algorithm
 (modified from moveHMM function 'viterbi')}
 \usage{
-viterbi_decoding(ssf_formula, tpm_formula, data, fit, n_states, dist = "gamma")
+viterbi_decoding(mod)
 }
 \arguments{
 \item{ssf_formula}{SSF formula of the HMM-SSF}
