@@ -11,11 +11,13 @@
 ##' @export
 
 
-viterbi_decoding <- function(ssf_formula,
-                             tpm_formula,
-                             data,
-                             fit,
-                             n_states) {
+viterbi_decoding <- function(mod) {
+  # unpack model
+  ssf_formula <- mod$args$ssf_formula
+  tpm_formula <- mod$args$tpm_formula
+  data <- mod$args$data
+  fit <- mod$par_CI
+  n_states <- mod$args$n_states
 
   # get observed locations
   obs <- subset(data, obs == 1)
