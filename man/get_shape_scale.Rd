@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_shape_scale.R
 \name{get_shape_scale}
 \alias{get_shape_scale}
-\title{Get the scale and scale from estimated betas}
+\title{Get the scale and scale from estimated ssf_par}
 \usage{
 get_shape_scale(fit, n_states)
 }
@@ -12,5 +12,5 @@ get_shape_scale(fit, n_states)
 \item{n_states}{number of fitted states}
 }
 \description{
-Get the scale and scale from estimated betas
+Get the scale and scale from estimated ssf_par
 }

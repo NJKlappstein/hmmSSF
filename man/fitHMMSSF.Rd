@@ -20,7 +20,7 @@ fitHMMSSF(
 
 \item{data}{data with columns for ID, stratum, obs,and covariates in formula}
 
-\item{par0}{list of starting values for parameters (betas, alphas)}
+\item{par0}{list of starting values for parameters (ssf_par, tpm_par)}
 
 \item{tmp_formula}{formula for transition probabilities (default = ~1)}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/beta_to_mean.R
 \name{beta_to_mean}
 \alias{beta_to_mean}
-\title{Get the mean and sd from estimated betas}
+\title{Get the mean and sd from estimated ssf_par}
 \usage{
 beta_to_mean(fit, n_states)
 }
@@ -12,5 +12,5 @@ beta_to_mean(fit, n_states)
 \item{n_states}{number of fitted states}
 }
 \description{
-Get the mean and sd from estimated betas
+Get the mean and sd from estimated ssf_par
 }

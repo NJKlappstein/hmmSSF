@@ -4,21 +4,10 @@
 \alias{nllk}
 \title{Negative log likelihood of the HMM-SSF (estimated with forward algorithm)}
 \usage{
-nllk(
-  par,
-  ssf_MM,
-  tpm_MM,
-  ID,
-  stratum,
-  n_states,
-  sampling_densities,
-  n_ssf_cov,
-  n_tpm_cov,
-  n_obs
-)
+nllk(par, ssf_MM, tpm_MM, ID, stratum, n_states, sampling_densities, n_obs)
 }
 \arguments{
-\item{par}{Vector of working paramters (betas, alphas)}
+\item{par}{Vector of working paramters (ssf_par, tpm_par)}
 
 \item{ssf_MM}{model matrix based on SSF formula}
 
@@ -29,10 +18,6 @@ nllk(
 \item{n_states}{number of states in the HMM}
 
 \item{sampling_densities}{dens of the controls for given sampling distribution}
-
-\item{n_ssf_cov}{number of ssf covariates}
-
-\item{n_tpm_cov}{number of transition probability covariates}
 
 \item{n_obs}{number of observed locations in the data}
 

@@ -7,7 +7,7 @@
 format_par(par, n_states, n_ssf_cov, n_tpm_cov)
 }
 \arguments{
-\item{par}{vector of parameters (betas, alphas)}
+\item{par}{vector of parameters (ssf_par, tpm_par)}
 
 \item{n_states}{number of states in the HMM}
 
