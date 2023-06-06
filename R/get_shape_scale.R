@@ -8,8 +8,8 @@
 get_shape_scale <- function(fit, n_states) {
 
   # calculate gamma par from ssf_par
-  scale <- - 1 / fit$ssf_par$estimate[which(fit$ssf_par$cov == "step")]
-  shape <- fit$ssf_par$estimate[which(fit$ssf_par$cov == "log(step)")] + 2
+  scale <- - 1 / fit$par$ssf$estimate[which(fit$par$ssf$cov == "step")]
+  shape <- fit$par$ssf$estimate[which(fit$par$ssf$cov == "log(step)")] + 2
 
   par_df <- data.frame(state = rep(1:n_states),
                         shape = shape,

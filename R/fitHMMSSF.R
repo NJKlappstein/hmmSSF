@@ -50,10 +50,10 @@ fitHMMSSF <- function(ssf_formula,
                hessian = TRUE)
 
   # unpack, back-transform, and get CIs of fitted parameters
-  par_CI <- hessian_CI(fit = fit,
-                       n_states = n_states,
-                       ssf_MM = ssf_MM,
-                       tpm_MM = tpm_MM)
+  par <- hessian_CI(fit = fit,
+                    n_states = n_states,
+                    ssf_MM = ssf_MM,
+                    tpm_MM = tpm_MM)
 
   # save model formulation in model object
   args <- list(tpm_formula = tpm_formula,
@@ -62,7 +62,7 @@ fitHMMSSF <- function(ssf_formula,
                n_states = n_states)
 
   # returned object
-  mod <- list(par_CI = par_CI,
+  mod <- list(par = par,
               fit = fit,
               args = args)
   class(mod) <- append("hmmSSF", class(mod))

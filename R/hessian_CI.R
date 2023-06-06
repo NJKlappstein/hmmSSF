@@ -38,17 +38,17 @@ hessian_CI <- function(fit, n_states, CI_range = 0.95, ssf_MM, tpm_MM) {
                       length(tpm_cov))
 
   upper <- format_par(upper_working,
-                     n_states,
-                     length(ssf_cov),
-                     length(tpm_cov))
+                      n_states,
+                      length(ssf_cov),
+                      length(tpm_cov))
 
 
   # format ssf_par
   ssf_par <- data.frame(state = rep(seq(1:n_states), each = length(ssf_cov)),
-                      cov = rep(ssf_cov, times = n_states),
-                      estimate = as.vector(estimates$ssf_par),
-                      lower = as.vector(lower$ssf_par),
-                      upper = as.vector(upper$ssf_par))
+                        cov = rep(ssf_cov, times = n_states),
+                        estimate = as.vector(estimates$ssf_par),
+                        lower = as.vector(lower$ssf_par),
+                        upper = as.vector(upper$ssf_par))
 
   #format tpm_par
   transitions <- NULL
@@ -57,13 +57,12 @@ hessian_CI <- function(fit, n_states, CI_range = 0.95, ssf_MM, tpm_MM) {
     transitions <- c(transitions, transitions_i)
   }
   tpm_par <- data.frame(transition = rep(transitions, each = length(tpm_cov)),
-                       cov = rep(tpm_cov, times = n_states),
-                       estimate = as.vector(estimates$tpm_par),
-                       lower = as.vector(lower$tpm_par),
-                       upper = as.vector(upper$tpm_par))
+                        cov = rep(tpm_cov, times = n_states),
+                        estimate = as.vector(estimates$tpm_par),
+                        lower = as.vector(lower$tpm_par),
+                        upper = as.vector(upper$tpm_par))
 
 
-  CI <- list("ssf_par" = ssf_par, "tpm_par" = tpm_par)
-
-  return(CI)
+  par <- list(ssf = ssf_par, tpm = tpm_par)
+  return(par)
 }
