@@ -7,23 +7,10 @@ track <- readRDS("inst/sim_data/sim_data.RData")
 cov_data <- readRDS("inst/sim_data/cov_raster.RData")
 track <- track[c(1:200),]
 
+# add random locations
 data <- random_locs(obs = track,
                     n_controls = 20,
                     dist = c("exp", "vm"))
-
-
-# hist(subset(data, obs ==0)$step)
-# hist(subset(data, obs ==0)$angle)
-# ggplot(subset(data, stratum %in% 3:4),
-#        aes(x,
-#            y,
-#            color = factor(stratum),
-#            group = factor(obs),
-#            shape = factor(obs),
-#            size = factor(obs))) +
-#   geom_point(alpha = 0.5, size = 0.5) +
-#   coord_equal()
-
 data$cov1 <- extract(cov_data, as.matrix(data[, c("x", "y")]))
 data$tod <- rep(lubridate::hour(track$time)[-(1:2)], each = 21)
 
@@ -41,6 +28,7 @@ par0 <- list(ssf_par = matrix(c(-2, -2,
                                 0.1, 1),
                               ncol = 2, byrow = TRUE))
 
+# fit model
 mod <- fitHMMSSF(ssf_formula = ssf_formula, tpm_formula = tpm_formula,
                  data = data, par0 = par0, n_states = n_states, optim_opts = list(trace = 1))
 

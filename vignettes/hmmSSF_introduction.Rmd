@@ -1,0 +1,28 @@
+---
+title: "State-switching step selection functions in hmmSSF"
+author: "Natasha Klappstein & Théo Michelot"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    number_sections: yes
+  html_document:
+    df_print: paged
+header-includes: \renewcommand{\baselinestretch}{1.2}
+fontsize: 12pt
+bibliography: refs.bib
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+message = FALSE, error = FALSE, warning = FALSE,
+comment = NA
+)
+```
+
+\tableofcontents
+
+We describe the analysis workflow for the R package hmmSSF, which implements state-switching step selection functions as described by @klappstein2023.
+
+# Deer analysis
+
+# References
