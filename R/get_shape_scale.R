@@ -1,17 +1,16 @@
 ##' Get the scale and scale from estimated ssf_par
 ##'
-##' @param fit fitted model output
-##' @param n_states number of fitted states
+##' @param mod fitted model output
 ##'
 ##' @export
 
-get_shape_scale <- function(fit, n_states) {
+get_shape_scale <- function(mod) {
 
   # calculate gamma par from ssf_par
-  scale <- - 1 / fit$par$ssf$estimate[which(fit$par$ssf$cov == "step")]
-  shape <- fit$par$ssf$estimate[which(fit$par$ssf$cov == "log(step)")] + 2
+  scale <- - 1 / mod$par$ssf$estimate[which(mod$par$ssf$cov == "step")]
+  shape <- mod$par$ssf$estimate[which(mod$par$ssf$cov == "log(step)")] + 2
 
-  par_df <- data.frame(state = rep(1:n_states),
+  par_df <- data.frame(state = 1:mod$args$n_states,
                         shape = shape,
                         scale = scale)
 
