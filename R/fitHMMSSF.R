@@ -5,7 +5,6 @@
 ##' @param data data with columns for ID, stratum, obs,and covariates in formula
 ##' @param par0 list of starting values for parameters (betas, alphas)
 ##' @param n_states how many states in the model
-##' @param dist distribution of the controls (default = "gamma", also "uniform")
 ##'
 ##' @export
 ##'
@@ -13,9 +12,9 @@
 
 fitHMMSSF <- function(ssf_formula,
                       tpm_formula = ~1,
+                      n_states,
                       data,
                       par0,
-                      n_states,
                       optim_opts = list(trace = 0, maxit = 5e4)) {
 
   # get vector of parameters
@@ -62,13 +61,13 @@ fitHMMSSF <- function(ssf_formula,
                        ssf_MM = ssf_MM,
                        tpm_MM = tpm_MM)
 
-  # Save model formulation in model object
+  # save model formulation in model object
   args <- list(tpm_formula = tpm_formula,
                ssf_formula = ssf_formula,
                data = data,
                n_states = n_states)
 
-  # Returned object
+  # returned object
   mod <- list(par_CI = par_CI,
               fit = fit,
               args = args)
