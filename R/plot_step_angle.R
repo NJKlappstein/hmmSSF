@@ -33,7 +33,7 @@ plot_step_angle <- function(fit,
   #### plot step dist ####
   #######################
 
-  # get step parameters from betas
+  # get step parameters from ssf_par
   step_par <- beta_to_mean(fit, n_states)
   gamma_par <- get_shape_scale(fit, n_states)
 
@@ -82,7 +82,7 @@ plot_step_angle <- function(fit,
   #######################
 
   # get grid of angles
-  angle_par <- fit$betas$estimate[which(fit$betas$cov == "cos(angle)")]
+  angle_par <- fit$ssf_par$estimate[which(fit$ssf_par$cov == "cos(angle)")]
   angle_grid <- seq(-pi, pi, by = 0.01)
   angle_lines <- NULL
   for(i in 1:n_states) {

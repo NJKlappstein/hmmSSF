@@ -12,10 +12,10 @@ print.hmmSSF <- function(mod) {
   cat("SSF model:\n")
   print(mod$args$ssf_formula)
   cat("\n")
-  print(mod$par_CI$betas)
+  print(mod$par_CI$ssf_par)
 
   cat("\n\nTPM model:\n")
   print(mod$args$tpm_formula)
   cat("\n")
-  print(mod$par_CI$alphas)
+  print(mod$par_CI$tpm_par)
 }

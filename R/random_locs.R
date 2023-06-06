@@ -48,6 +48,8 @@ random_locs <- function(obs,
                  y = c(xy[i,2], pts[,2]),
                  step = c(steps[i-1], sim_step),
                  angle = c(angles[i-2], sim_angle),
+                 time = as.POSIXct(sub_obs$time[i],
+                                   tz = attr(sub_obs$time, "tzone")),
                  w = c(NA, weights))
     })
 

@@ -43,27 +43,27 @@ hessian_CI <- function(fit, n_states, CI_range = 0.95, ssf_MM, tpm_MM) {
                      length(tpm_cov))
 
 
-  # format betas
-  betas <- data.frame(state = rep(seq(1:n_states), each = length(ssf_cov)),
+  # format ssf_par
+  ssf_par <- data.frame(state = rep(seq(1:n_states), each = length(ssf_cov)),
                       cov = rep(ssf_cov, times = n_states),
-                      estimate = as.vector(estimates$betas),
-                      lower = as.vector(lower$betas),
-                      upper = as.vector(upper$betas))
+                      estimate = as.vector(estimates$ssf_par),
+                      lower = as.vector(lower$ssf_par),
+                      upper = as.vector(upper$ssf_par))
 
-  #format alphas
+  #format tpm_par
   transitions <- NULL
   for(i in 1:n_states) {
     transitions_i <- paste(i, seq(1:n_states)[-i], sep = "-")
     transitions <- c(transitions, transitions_i)
   }
-  alphas <- data.frame(transition = rep(transitions, each = length(tpm_cov)),
+  tpm_par <- data.frame(transition = rep(transitions, each = length(tpm_cov)),
                        cov = rep(tpm_cov, times = n_states),
-                       estimate = as.vector(estimates$alphas),
-                       lower = as.vector(lower$alphas),
-                       upper = as.vector(upper$alphas))
+                       estimate = as.vector(estimates$tpm_par),
+                       lower = as.vector(lower$tpm_par),
+                       upper = as.vector(upper$tpm_par))
 
 
-  CI <- list("betas" = betas, "alphas" = alphas)
+  CI <- list("ssf_par" = ssf_par, "tpm_par" = tpm_par)
 
   return(CI)
 }
