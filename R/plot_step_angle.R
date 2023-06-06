@@ -1,26 +1,23 @@
-##' Plot histograms with estimated state densities
-##'
-##' @param fit fitted model output
-##' @param decode decoded states from the viterbi algorithm
-##' @param data data used to fit the model
-##' @param n_states number of fitted states
-##' @param pal color palette to use (default = NULL)
-##' @param as_list whether or not to return plots as a list (default = FALSE to simply plot)
-##'
-##' @export
+#' Plot histograms with estimated state densities
+#'
+#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
+#' @param pal color palette to use (default = NULL)
+#' @param as_list whether or not to return plots as a list
+#' (default = FALSE to simply plot)
+#'
+#' @export
 
-plot_step_angle <- function(fit,
-                            decode,
-                            data,
-                            n_states,
+plot_step_angle <- function(mod,
                             pal = NULL,
                             as_list = FALSE) {
 
-  obs <- subset(data, obs == 1 & !is.na(step))
+  states <- viterbi_decoding(mod)
+  n_states <- mod$args$n_states
+  obs <- subset(mod$args$data, obs == 1 & !is.na(step))
 
   # get weights for each state
-  weights <- c(length(which(decode == 1)) / nrow(obs),
-               length(which(decode == 2)) / nrow(obs))
+  weights <- c(length(which(states == 1)) / nrow(obs),
+               length(which(states == 2)) / nrow(obs))
 
   # set colour palette
   if(is.null(pal)) {
@@ -81,7 +78,7 @@ plot_step_angle <- function(fit,
   #######################
 
   # get grid of angles
-  angle_par <- fit$ssf_par$estimate[which(fit$ssf_par$cov == "cos(angle)")]
+  angle_par <- mod$par$ssf$estimate[which(mod$par$ssf$cov == "cos(angle)")]
   angle_grid <- seq(-pi, pi, by = 0.01)
   angle_lines <- NULL
   for(i in 1:n_states) {
