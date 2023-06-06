@@ -7,24 +7,22 @@
 fitHMMSSF(
   ssf_formula,
   tpm_formula = ~1,
+  n_states,
   data,
   par0,
-  n_states,
   optim_opts = list(trace = 0, maxit = 50000)
 )
 }
 \arguments{
 \item{ssf_formula}{model formula for ssf}
 
+\item{n_states}{how many states in the model}
+
 \item{data}{data with columns for ID, stratum, obs,and covariates in formula}
 
 \item{par0}{list of starting values for parameters (betas, alphas)}
 
-\item{n_states}{how many states in the model}
-
 \item{tmp_formula}{formula for transition probabilities (default = ~1)}
-
-\item{dist}{distribution of the controls (default = "gamma", also "uniform")}
 }
 \description{
 Fit the HMM-SSF

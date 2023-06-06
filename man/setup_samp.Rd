@@ -4,7 +4,7 @@
 \alias{setup_samp}
 \title{Setup importance sampling distributions}
 \usage{
-setup_samp(dist = "uniform", obs)
+setup_samp(distr = "uniform", obs)
 }
 \description{
 Setup importance sampling distributions
