@@ -1,15 +1,17 @@
-
-#' Simulate control steps
+#' Simulate random locations for model fitting
 #'
 #' @param obs Data frame of observations (ID, x, y, time)
 #' @param n_controls Number of control steps ("controls") per observation
-#' @param dist Name(s) of distribution(s) used to generate control steps.
+#' @param distr Name(s) of distribution(s) used to generate control steps.
 #'
 #' @export
-sim_controls2 <- function(obs, n_controls, dist = "uniform")
+
+random_locs <- function(obs,
+                        n_controls,
+                        distr = "uniform")
 {
   # Setup sampling distributions
-  setup <- setup_samp(dist = dist, obs = obs)
+  setup <- setup_samp(distr = distr, obs = obs)
 
   # Loop over IDs
   data_all <- NULL
@@ -39,13 +41,13 @@ sim_controls2 <- function(obs, n_controls, dist = "uniform")
       pts <- rep(xy[i-1,], each = n_controls) +
         sim_step * cbind(cos(sim_bear), sin(sim_bear))
 
-      data.frame(x = c(xy[i,1], pts[,1]),
+      data.frame(ID = id,
+                 stratum = i,
+                 obs = c(1, rep(0, n_controls)),
+                 x = c(xy[i,1], pts[,1]),
                  y = c(xy[i,2], pts[,2]),
                  step = c(steps[i-1], sim_step),
                  angle = c(angles[i-2], sim_angle),
-                 stratum = i,
-                 obs = c(1, rep(0, n_controls)),
-                 ID = id,
                  w = c(NA, weights))
     })
 
