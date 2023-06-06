@@ -55,3 +55,9 @@ mod
 
 states <- viterbi_decoding(mod)
 sp <- local_decoding(mod)
+
+get_shape_scale(mod)
+
+new_data <- data.frame(tod = 0:24)
+foo <- predict_tpm(mod, new_data = new_data)
+bar <- predict_delta(mod, new_data = new_data)
