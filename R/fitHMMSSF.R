@@ -36,10 +36,6 @@ fitHMMSSF <- function(ssf_formula,
   options(na.action = 'na.pass')
   tpm_MM <- model.matrix(tpm_formula, obs)
 
-  # get number of covariates for each formula
-  n_ssf_cov <- ncol(ssf_MM)
-  n_tpm_cov <- ncol(tpm_MM)
-
   # optimise negative log likelihood
   fit <- optim(par = par,
                fn = nllk,
@@ -49,8 +45,6 @@ fitHMMSSF <- function(ssf_formula,
                stratum = data$stratum,
                ID = data$ID,
                n_states = n_states,
-               n_tpm_cov = n_tpm_cov,
-               n_ssf_cov = n_ssf_cov,
                n_obs = nrow(obs),
                control = optim_opts,
                hessian = TRUE)

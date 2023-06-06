@@ -7,8 +7,6 @@
 ##' @param statum stratum ID from data
 ##' @param n_states number of states in the HMM
 ##' @param sampling_densities dens of the controls for given sampling distribution
-##' @param n_tpm_cov number of transition probability covariates
-##' @param n_ssf_cov number of ssf covariates
 ##' @param n_obs number of observed locations in the data
 ##'
 ##' @export
@@ -20,12 +18,10 @@ nllk <- function(par,
                  stratum,
                  n_states,
                  sampling_densities,
-                 n_ssf_cov,
-                 n_tpm_cov,
                  n_obs)
 {
   # back-transform parameters
-  par <- format_par(par, n_states, n_ssf_cov, n_tpm_cov)
+  par <- format_par(par, n_states, ncol(ssf_MM), ncol(tpm_MM))
 
   # calculate linear predictors for the ssf
   ssf_LP <- ssf_MM %*% par$betas
