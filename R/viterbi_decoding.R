@@ -24,8 +24,8 @@ viterbi_decoding <- function(mod) {
   n_obs <- nrow(obs)
 
   # separate parameters from list
-  betas <-  matrix(fit$betas$estimate, ncol = n_states)
-  alphas <- matrix(fit$alphas$estimate, ncol = n_states^2 - n_states)
+  ssf_par <-  matrix(fit$ssf_par$estimate, ncol = n_states)
+  tpm_par <- matrix(fit$tpm_par$estimate, ncol = n_states^2 - n_states)
 
   # get model matrix (without intercept)
   options(na.action = 'na.pass')
@@ -33,7 +33,7 @@ viterbi_decoding <- function(mod) {
   ssf_MM <- ssf_MM[,!colnames(ssf_MM) == "(Intercept)"]
 
   # calculate linear predictors
-  ssf_LP <- ssf_MM %*% betas
+  ssf_LP <- ssf_MM %*% ssf_par
 
   # get sampling densities
   sampling_densities <- attr(data, "weights")
@@ -50,7 +50,7 @@ viterbi_decoding <- function(mod) {
   options(na.action = 'na.pass')
   tpm_MM <- model.matrix(tpm_formula, obs)
   Gamma <-  moveHMM:::trMatrix_rcpp(nbStates = n_states,
-                                        beta = alphas,
+                                        beta = tpm_par,
                                         covs = tpm_MM)
 
   # get delta from Gamma

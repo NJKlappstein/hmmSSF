@@ -15,13 +15,13 @@ predict_delta <- function(tpm_formula,
                         return_CI = TRUE) {
 
     # separate parameters from list
-    alphas <- matrix(fit$alphas$estimate, ncol = n_states^2 - n_states)
+    tpm_par <- matrix(fit$tpm_par$estimate, ncol = n_states^2 - n_states)
 
     # get Gamma from TP model matrix
     options(na.action = 'na.pass')
     tpm_MM <- model.matrix(tpm_formula, new_data)
     Gamma <-  moveHMM:::trMatrix_rcpp(nbStates = n_states,
-                                      beta = alphas,
+                                      beta = tpm_par,
                                       covs = tpm_MM)
     delta <- t(apply(Gamma, 3, function(tpm) {
         solve(t(diag(n_states) - tpm + 1), rep(1, n_states))
@@ -31,7 +31,7 @@ predict_delta <- function(tpm_formula,
 
     if(return_CI) {
         # get covariance matrix
-        par_ind <- (nrow(fit$betas) + 1) : (nrow(fit$betas) + nrow(fit$alphas))
+        par_ind <- (nrow(fit$ssf_par) + 1) : (nrow(fit$ssf_par) + nrow(fit$tpm_par))
         Sigma <- solve(fit$hessian)[par_ind, par_ind]
 
         # for differentiation to obtain confidence intervals (delta method)
@@ -51,7 +51,7 @@ predict_delta <- function(tpm_formula,
         for(i in 1:n_states) {
                 # derive confidence intervals using the delta method
                 dN <- t(apply(tpm_MM, 1, function(x)
-                    numDeriv::grad(get_delta, alphas,
+                    numDeriv::grad(get_delta, tpm_par,
                                    modmat = matrix(x, nrow = 1),
                                    n_states = n_states, i = i)))
 

@@ -3,7 +3,7 @@
 ##' @param ssf_formula model formula for ssf
 ##' @param tmp_formula formula for transition probabilities (default = ~1)
 ##' @param data data with columns for ID, stratum, obs,and covariates in formula
-##' @param par0 list of starting values for parameters (betas, alphas)
+##' @param par0 list of starting values for parameters (ssf_par, tpm_par)
 ##' @param n_states how many states in the model
 ##'
 ##' @export
@@ -18,7 +18,7 @@ fitHMMSSF <- function(ssf_formula,
                       optim_opts = list(trace = 0, maxit = 5e4)) {
 
   # get vector of parameters
-  par <- c(par0$betas, par0$alphas)
+  par <- c(par0$ssf_par, par0$tpm_par)
 
   # order data
   data <- data[order(data$ID, data$stratum, -data$obs),]
