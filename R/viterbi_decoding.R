@@ -1,15 +1,10 @@
-##' Generate most probable state sequence using the viterbi algorithm
-##' (modified from moveHMM function 'viterbi')
-##'
-##' @param ssf_formula SSF formula of the HMM-SSF
-##' @param tpm_formula TP formula
-##' @param data data used to fit the model
-##' @param fit fitted model output from fitHMMSSF
-##' @param n_states number of states
-##' @param dist control sampling distribution (default = "gamma")
-##'
-##' @export
 
+#' Generate most probable state sequence using the viterbi algorithm
+#' (modified from moveHMM function 'viterbi')
+#'
+#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
+#'
+#' @export
 
 viterbi_decoding <- function(mod) {
   # unpack model

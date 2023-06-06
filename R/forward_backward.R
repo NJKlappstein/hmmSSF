@@ -2,15 +2,12 @@
 #' Forward-backward algorithm
 #' (modified from hmmTMB function 'HMM$forward_backward')
 #'
-#' @param ssf_formula SSF formula of the HMM-SSF
-#' @param tpm_formula TP formula
-#' @param data data used to fit the model
-#' @param fit fitted model output from fitHMMSSF
-#' @param n_states number of states
+#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
 #'
 #' @return List with two elements: \code{log_forward}
 #' (log forward probabilities) and \code{log_backward}
 #' (log backward probabilities)
+
 forward_backward <- function(mod) {
   # unpack model
   ssf_formula <- mod$args$ssf_formula

@@ -9,7 +9,6 @@
 ##'
 ##' @export
 
-
 plot_step_angle <- function(fit,
                             decode,
                             data,

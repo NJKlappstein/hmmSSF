@@ -2,7 +2,7 @@
 #' Print method for hmmSSF model objects
 #' @method print hmmSSF
 #'
-#' @param mod hmmSSF model object
+#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
 #'
 #' @export
 print.hmmSSF <- function(mod) {

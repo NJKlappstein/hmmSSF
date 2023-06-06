@@ -4,10 +4,15 @@
 \alias{predict_delta}
 \title{Predict stationary state probabilities (with uncertainty)}
 \usage{
-predict_delta(tpm_formula, new_data, fit, n_states, return_CI = TRUE)
+predict_delta(mod, new_data, return_CI = TRUE)
 }
 \arguments{
-\item{...}{}
+\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
+
+\item{new_data}{Data frame with covariate values to use for prediction}
+
+\item{return_CI}{Logical (default: TRUE). Should confidence intervals be
+computed?}
 }
 \value{
 List with elements 'mle', 'upper', and 'lower'.

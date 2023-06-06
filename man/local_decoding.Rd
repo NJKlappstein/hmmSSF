@@ -8,17 +8,7 @@
 local_decoding(mod)
 }
 \arguments{
-\item{ssf_formula}{SSF formula of the HMM-SSF}
-
-\item{tpm_formula}{TP formula}
-
-\item{data}{data used to fit the model}
-
-\item{fit}{fitted model output from fitHMMSSF}
-
-\item{n_states}{number of states}
-
-\item{dist}{control sampling distribution (default = "gamma")}
+\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
 }
 \value{
 Matrix of state probabilities, with one row for each

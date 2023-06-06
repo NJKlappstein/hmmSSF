@@ -2,12 +2,7 @@
 #' Local decoding using the forward-backward algorithm
 #' (modified from hmmTMB function 'HMM$state_probs')
 #'
-#' @param ssf_formula SSF formula of the HMM-SSF
-#' @param tpm_formula TP formula
-#' @param data data used to fit the model
-#' @param fit fitted model output from fitHMMSSF
-#' @param n_states number of states
-#' @param dist control sampling distribution (default = "gamma")
+#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
 #'
 #' @return Matrix of state probabilities, with one row for each
 #' observation time, and one column for each state. The (i, j)-th

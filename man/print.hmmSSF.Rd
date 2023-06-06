@@ -7,7 +7,7 @@
 \method{print}{hmmSSF}(mod)
 }
 \arguments{
-\item{mod}{hmmSSF model object}
+\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
 }
 \description{
 Print method for hmmSSF model objects

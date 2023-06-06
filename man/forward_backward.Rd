@@ -8,15 +8,7 @@
 forward_backward(mod)
 }
 \arguments{
-\item{ssf_formula}{SSF formula of the HMM-SSF}
-
-\item{tpm_formula}{TP formula}
-
-\item{data}{data used to fit the model}
-
-\item{fit}{fitted model output from fitHMMSSF}
-
-\item{n_states}{number of states}
+\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
 }
 \value{
 List with two elements: \code{log_forward}
