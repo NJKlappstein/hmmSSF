@@ -4,12 +4,10 @@
 \alias{get_shape_scale}
 \title{Get the scale and scale from estimated ssf_par}
 \usage{
-get_shape_scale(fit, n_states)
+get_shape_scale(mod)
 }
 \arguments{
-\item{fit}{fitted model output}
-
-\item{n_states}{number of fitted states}
+\item{mod}{fitted model output}
 }
 \description{
 Get the scale and scale from estimated ssf_par
