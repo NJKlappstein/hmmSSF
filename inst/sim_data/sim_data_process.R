@@ -53,8 +53,5 @@ mod
 # coefficients(mod)$ssf_par
 # lower(mod)
 
-
-
-
-
-
+states <- viterbi_decoding(mod)
+sp <- local_decoding(mod)
