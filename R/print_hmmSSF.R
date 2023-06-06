@@ -6,5 +6,16 @@
 #'
 #' @export
 print.hmmSSF <- function(mod) {
-  print(mod$par_CI)
+  cat("Negative log-likelihood:", mod$fit$value, "\n")
+  cat("Convergence code:", mod$fit$convergence, "\n\n")
+
+  cat("SSF model:\n")
+  print(mod$args$ssf_formula)
+  cat("\n")
+  print(mod$par_CI$betas)
+
+  cat("\n\nTPM model:\n")
+  print(mod$args$tpm_formula)
+  cat("\n")
+  print(mod$par_CI$alphas)
 }
