@@ -9,20 +9,27 @@ fitHMMSSF(
   tpm_formula = ~1,
   n_states,
   data,
-  par0,
+  ssf_par0,
+  tpm_par0 = NULL,
   optim_opts = list(trace = 0, maxit = 50000)
 )
 }
 \arguments{
-\item{ssf_formula}{model formula for ssf}
+\item{ssf_formula}{Model formula for ssf}
 
-\item{n_states}{how many states in the model}
+\item{n_states}{Number of HMM states}
 
-\item{data}{data with columns for ID, stratum, obs,and covariates in formula}
+\item{data}{Data frame with named columns for ID, stratum, obs, and
+covariates in ssf_formula}
 
-\item{par0}{list of starting values for parameters (ssf_par, tpm_par)}
+\item{ssf_par0}{Matrix of starting values for SSF parameters, with one row
+for each covariate and one column for each HMM state.}
 
-\item{tmp_formula}{formula for transition probabilities (default = ~1)}
+\item{tpm_par0}{Matrix of starting values for transition probability
+parameters, with one row for each covariate (including the first row for
+intercepts) and one column for each off-diagonal transition probability.}
+
+\item{tmp_formula}{Formula for transition probabilities (default = ~1)}
 }
 \description{
 Fit the HMM-SSF

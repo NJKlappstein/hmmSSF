@@ -4,16 +4,16 @@
 \alias{format_par}
 \title{Format parameters back into matrix form}
 \usage{
-format_par(par, n_states, n_ssf_cov, n_tpm_cov)
+format_par(par, n_states, ssf_cov, tpm_cov)
 }
 \arguments{
-\item{par}{vector of parameters (ssf_par, tpm_par)}
+\item{par}{Vector of parameters (ssf_par, tpm_par)}
 
-\item{n_states}{number of states in the HMM}
+\item{n_states}{Number of states in the HMM}
 
-\item{n_ssf_cov}{number of SSF covariates}
+\item{ssf_cov}{Names of SSF covariates}
 
-\item{n_tpm_cov}{number of TPM covariates}
+\item{tpm_cov}{Names of TPM covariates}
 }
 \description{
 Format parameters back into matrix form

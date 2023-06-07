@@ -44,8 +44,6 @@ fitHMMSSF <- function(ssf_formula,
   }
   par <- c(ssf_par0, tpm_par0)
 
-
-
   # get sampling densities for correction
   sampling_densities <- attr(data, "weights")
 
@@ -62,17 +60,18 @@ fitHMMSSF <- function(ssf_formula,
                control = optim_opts,
                hessian = TRUE)
 
-  # unpack, back-transform, and get CIs of fitted parameters
-  par <- hessian_CI(fit = fit,
-                    n_states = n_states,
-                    ssf_MM = ssf_MM,
-                    tpm_MM = tpm_MM)
+  # unpack fitted parameters
+  par <-  format_par(par = fit$par, n_states = n_states,
+                     ssf_cov = colnames(ssf_MM),
+                     tpm_cov = colnames(tpm_MM))
 
   # save model formulation in model object
   args <- list(tpm_formula = tpm_formula,
                ssf_formula = ssf_formula,
                data = data,
-               n_states = n_states)
+               n_states = n_states,
+               ssf_cov = colnames(ssf_MM),
+               tpm_cov = colnames(tpm_MM))
 
   # returned object
   mod <- list(par = par,
