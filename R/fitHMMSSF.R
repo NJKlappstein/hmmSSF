@@ -1,24 +1,27 @@
-##' Fit the HMM-SSF
-##'
-##' @param ssf_formula model formula for ssf
-##' @param tmp_formula formula for transition probabilities (default = ~1)
-##' @param data data with columns for ID, stratum, obs,and covariates in formula
-##' @param par0 list of starting values for parameters (ssf_par, tpm_par)
-##' @param n_states how many states in the model
-##'
-##' @export
-##'
-##' @useDynLib hmmSSF
+#' Fit the HMM-SSF
+#'
+#' @param ssf_formula Model formula for ssf
+#' @param tmp_formula Formula for transition probabilities (default = ~1)
+#' @param n_states Number of HMM states
+#' @param data Data frame with named columns for ID, stratum, obs, and
+#' covariates in ssf_formula
+#' @param ssf_par0 Matrix of starting values for SSF parameters, with one row
+#' for each covariate and one column for each HMM state.
+#' @param tpm_par0 Matrix of starting values for transition probability
+#' parameters, with one row for each covariate (including the first row for
+#' intercepts) and one column for each off-diagonal transition probability.
+#'
+#' @export
+#'
+#' @useDynLib hmmSSF
 
 fitHMMSSF <- function(ssf_formula,
                       tpm_formula = ~1,
                       n_states,
                       data,
-                      par0,
+                      ssf_par0,
+                      tpm_par0 = NULL,
                       optim_opts = list(trace = 0, maxit = 5e4)) {
-
-  # get vector of parameters
-  par <- c(par0$ssf_par, par0$tpm_par)
 
   # order data
   data <- data[order(data$ID, data$stratum, -data$obs),]
@@ -29,12 +32,22 @@ fitHMMSSF <- function(ssf_formula,
   ssf_MM <- model.matrix(ssf_formula, data)
   ssf_MM <- ssf_MM[,!colnames(ssf_MM) == "(Intercept)"]
 
-  # get sampling densities for correction
-  sampling_densities <- attr(data, "weights")
-
   # get transition probabilities model matrix
   options(na.action = 'na.pass')
   tpm_MM <- model.matrix(tpm_formula, obs)
+
+  # get vector of parameters
+  if(is.null(tpm_par0)) {
+    # if tpm_par0 not provided, default to -2 for intercept and 0 elsewhere
+    tpm_par0 <- matrix(0, nrow = ncol(tpm_MM), ncol = n_states * (n_states - 1))
+    tpm_par0[1,] <- - 2
+  }
+  par <- c(ssf_par0, tpm_par0)
+
+
+
+  # get sampling densities for correction
+  sampling_densities <- attr(data, "weights")
 
   # optimise negative log likelihood
   fit <- optim(par = par,

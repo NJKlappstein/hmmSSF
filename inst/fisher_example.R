@@ -26,14 +26,12 @@ data$y <- data$y / 1000
 ## HMM-SSF analysis ##
 ######################
 f <- ~ step + cos(angle) + elev
-par0 <- list(ssf_par = matrix(c(-10, -2,
-                                0.5, 2,
-                                0, 0),
-                              ncol = 2, byrow = TRUE),
-             tpm_par = matrix(c(-2, -2),
-                              nrow = 1))
+ssf_par0 <- matrix(c(-10, -2,
+                     0.5, 2,
+                     0, 0),
+                   ncol = 2, byrow = TRUE)
 mod <- fitHMMSSF(ssf_formula = f, n_states = 2, data = data,
-                 par0 = par0, optim_opts = list(trace = 1))
+                 ssf_par0 = ssf_par0, optim_opts = list(trace = 1))
 
 mod
 
