@@ -13,7 +13,7 @@ tracks <- data.frame(ID = amt_fisher$id,
                      x = amt_fisher$x_,
                      y = amt_fisher$y_,
                      time = amt_fisher$t_)
-tracks <- subset(tracks, ID == unique(ID)[1])
+tracks <- subset(tracks, ID %in% unique(ID)[c(1, 3)])
 n_random <- 50
 data <- random_locs(obs = tracks, n_controls = n_random, distr = "gamma")
 
@@ -48,7 +48,8 @@ confint(mod)
 ## Plot track ##
 ################
 data$state <- rep(factor(viterbi_decoding(mod)), each = n_random + 1)
-ggplot(subset(data, obs == 1), aes(x, y, col = state, group = NA)) +
+ggplot(subset(data, obs == 1), aes(x, y, col = state, group = ID)) +
+  facet_wrap("ID") +
   geom_point() +
   geom_path() +
   coord_equal()
