@@ -9,13 +9,16 @@ print.hmmSSF <- function(mod) {
   cat("Negative log-likelihood:", mod$fit$value, "\n")
   cat("Convergence code:", mod$fit$convergence, "\n\n")
 
-  cat("SSF model:\n")
-  print(mod$args$ssf_formula)
-  cat("\n")
-  print(mod$par$ssf)
+  # get parameters and 95% confidence intervals
+  par <- confint(mod, pretty = TRUE)
 
-  cat("\n\nTPM model:\n")
-  print(mod$args$tpm_formula)
+  cat("SSF model:\n")
+  cat(deparse(mod$args$ssf_formula))
   cat("\n")
-  print(mod$par$tpm)
+  print(round(par$ssf, 3))
+
+  cat("\nTPM model:\n")
+  cat(deparse(mod$args$tpm_formula))
+  cat("\n")
+  print(round(par$tpm, 3))
 }
