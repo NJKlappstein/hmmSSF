@@ -8,7 +8,7 @@
 #'
 #' @export
 
-confint.hmmSSF <- function(mod, range = 0.95) {
+confint.hmmSSF <- function(mod, range = 0.95, pretty = FALSE) {
   # inverse of Hessian
   Sigma <- ginv(mod$fit$hessian)
   var <- diag(Sigma)
@@ -29,5 +29,20 @@ confint.hmmSSF <- function(mod, range = 0.95) {
                         ssf_cov = mod$args$ssf_cov,
                         tpm_cov = mod$args$tpm_cov)
 
-  return(list(low = low_mat, upp = upp_mat))
+  out <- list(ssf = list(low = low_mat$ssf, upp = upp_mat$ssf),
+              tpm = list(low = low_mat$tpm, upp = upp_mat$tpm))
+
+  if(pretty) {
+    rows_ssf <- paste0(rep(rownames(out$ssf$low), 2), ".",
+                       rep(colnames(out$ssf$low), each = nrow(out$ssf$low)))
+    mat_ssf <- matrix(c(mod$par$ssf, out$ssf$low, out$ssf$upp), ncol = 3,
+                      dimnames = list(rows_ssf, c("mle", "low", "upp")))
+    rows_tpm <- paste0(rep(rownames(out$tpm$low), 2), ".",
+                       rep(colnames(out$tpm$low), each = nrow(out$tpm$low)))
+    mat_tpm <- matrix(c(mod$par$tpm, out$tpm$low, out$tpm$upp), ncol = 3,
+                      dimnames = list(rows_tpm, c("mle", "low", "upp")))
+    out <- list(ssf = mat_ssf, tpm = mat_tpm)
+  }
+
+  return(out)
 }
