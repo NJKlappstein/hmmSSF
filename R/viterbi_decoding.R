@@ -11,7 +11,6 @@ viterbi_decoding <- function(mod) {
   ssf_formula <- mod$args$ssf_formula
   tpm_formula <- mod$args$tpm_formula
   data <- mod$args$data
-  par <- mod$par
   n_states <- mod$args$n_states
 
   # get observed locations
@@ -19,8 +18,8 @@ viterbi_decoding <- function(mod) {
   n_obs <- nrow(obs)
 
   # separate parameters from list
-  ssf_par <-  matrix(par$ssf$estimate, ncol = n_states)
-  tpm_par <- matrix(par$tpm$estimate, ncol = n_states^2 - n_states)
+  ssf_par <-  mod$par$ssf
+  tpm_par <- mod$par$tpm
 
   # get model matrix (without intercept)
   options(na.action = 'na.pass')

@@ -13,7 +13,6 @@ forward_backward <- function(mod) {
   ssf_formula <- mod$args$ssf_formula
   tpm_formula <- mod$args$tpm_formula
   data <- mod$args$data
-  par <- mod$par
   n_states <- mod$args$n_states
 
   # get observed locations
@@ -22,8 +21,8 @@ forward_backward <- function(mod) {
   n_by_ID <- as.numeric(table(obs$ID))
 
   # separate parameters from list
-  ssf_par <-  matrix(par$ssf$estimate, ncol = n_states)
-  tpm_par <- matrix(par$tpm$estimate, ncol = n_states^2 - n_states)
+  ssf_par <- mod$par$ssf
+  tpm_par <- mod$par$tpm
 
   # get model matrix (without intercept)
   options(na.action = 'na.pass')
