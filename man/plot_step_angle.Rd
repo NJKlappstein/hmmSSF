@@ -4,20 +4,15 @@
 \alias{plot_step_angle}
 \title{Plot histograms with estimated state densities}
 \usage{
-plot_step_angle(fit, decode, data, n_states, pal = NULL, as_list = FALSE)
+plot_step_angle(mod, pal = NULL, as_list = FALSE)
 }
 \arguments{
-\item{fit}{fitted model output}
-
-\item{decode}{decoded states from the viterbi algorithm}
-
-\item{data}{data used to fit the model}
-
-\item{n_states}{number of fitted states}
+\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
 
 \item{pal}{color palette to use (default = NULL)}
 
-\item{as_list}{whether or not to return plots as a list (default = FALSE to simply plot)}
+\item{as_list}{whether or not to return plots as a list
+(default = FALSE to simply plot)}
 }
 \description{
 Plot histograms with estimated state densities
