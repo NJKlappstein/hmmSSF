@@ -20,5 +20,12 @@ print.hmmSSF <- function(mod) {
   cat("\nTPM model:\n")
   cat(deparse(mod$args$tpm_formula))
   cat("\n")
-  print(round(par$tpm, 3))
+  if(deparse(mod$args$tpm_formula) == "~1") {
+    tpm <- predict_tpm(mod = mod,
+                       new_data = mod$args$data[1,],
+                       return_CI = FALSE)
+    print(round(tpm$mle[,,1], 3))
+  } else {
+    print(round(par$tpm, 3))
+  }
 }

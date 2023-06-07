@@ -20,7 +20,7 @@ predict_tpm <- function(mod,
   tpm_formula <- mod$args$tpm_formula
 
   # separate parameters from list
-  tpm_par <- matrix(mod$par$tpm$estimate, ncol = n_states^2 - n_states)
+  tpm_par <- mod$par$tpm
 
   # get Gamma from TP model matrix
   options(na.action = 'na.pass')
@@ -28,13 +28,14 @@ predict_tpm <- function(mod,
   Gamma <-  moveHMM:::trMatrix_rcpp(nbStates = n_states,
                                     beta = tpm_par,
                                     covs = tpm_MM)
-  rownames(Gamma) <- 1:n_states
-  colnames(Gamma) <- 1:n_states
+  rownames(Gamma) <- paste0("S", 1:n_states)
+  colnames(Gamma) <- paste0("S", 1:n_states)
   out <- list(mle = Gamma)
 
   if(return_CI) {
     # get covariance matrix
-    par_ind <- (nrow(mod$par$ssf) + 1) : (nrow(mod$par$ssf) + nrow(mod$par$tpm))
+    par_ind <- (length(mod$par$ssf) + 1) :
+      (length(mod$par$ssf) + length(mod$par$tpm))
     Sigma <- solve(mod$fit$hessian)[par_ind, par_ind]
 
     # for differentiation to obtain confidence intervals (delta method)

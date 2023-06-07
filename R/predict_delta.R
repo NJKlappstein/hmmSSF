@@ -20,7 +20,7 @@ predict_delta <- function(mod,
   tpm_formula <- mod$args$tpm_formula
 
   # separate parameters from list
-  tpm_par <- matrix(mod$par$tpm$estimate, ncol = n_states^2 - n_states)
+  tpm_par <- mod$par$tpm
 
   # get Gamma from TP model matrix
   options(na.action = 'na.pass')
@@ -36,7 +36,8 @@ predict_delta <- function(mod,
 
   if(return_CI) {
     # get covariance matrix
-    par_ind <- (nrow(mod$par$ssf) + 1) : (nrow(mod$par$ssf) + nrow(mod$par$tpm))
+    par_ind <- (length(mod$par$ssf) + 1) :
+      (length(mod$par$ssf) + length(mod$par$tpm))
     Sigma <- solve(mod$fit$hessian)[par_ind, par_ind]
 
     # for differentiation to obtain confidence intervals (delta method)

@@ -4,7 +4,7 @@ theme_set(theme_bw())
 library(amt)
 library(terra)
 library(hmmSSF)
-# set.seed(1)
+set.seed(1)
 
 ##################
 ## Prepare data ##
@@ -19,32 +19,25 @@ data <- random_locs(obs = tracks, n_controls = n_random, distr = "gamma")
 
 elev <- unwrap(amt_fisher_covar$elevation)
 data$elev <- extract(elev, data[, c("x", "y")])$elevation
-data$tod <- lubridate::hour(data$time) + lubridate::minute(data$time) / 60
 
 data$step <- data$step / 1000
 data$x <- data$x / 1000
 data$y <- data$y / 1000
 
-# ggplot(subset(data, obs == 1), aes(x, y, group = ID)) +
-#   geom_point(size = 0.3) +
-#   geom_path() +
-#   coord_equal()
-
 ######################
 ## HMM-SSF analysis ##
 ######################
 f <- ~ step + log(step) + cos(angle) + elev
-# f2 <- ~ cos(2*pi*tod/24) + sin(2*pi*tod/24)
-f2 <- ~1
-ssf_par0 <- matrix(c(-10, -2,
-                     0, 0,
-                     0.5, 2,
-                     0, 0),
-                   ncol = 2, byrow = TRUE)
+f2 <- ~ elev
+ssf_par0 <- matrix(c(-10, -5, -2,
+                     0, 0, 0,
+                     0.5, 1, 2,
+                     0, 0, 0),
+                   ncol = 3, byrow = TRUE)
 mod <- fitHMMSSF(ssf_formula = f, tpm_formula = f2,
-                 n_states = 2, data = data,
+                 n_states = 3, data = data,
                  ssf_par0 = ssf_par0,
-                 optim_opts = list(trace = 1, maxit = 500))
+                 optim_opts = list(trace = 1, maxit = 1000))
 
 ################
 ## Plot track ##
