@@ -26,13 +26,14 @@ random_locs <- function(obs,
     # Get a few movement metrics
     steps <- sqrt(rowSums((xy[-1,] - xy[-n_obs,])^2))
     bears <- atan2(diff(xy[,2]), diff(xy[,1]))
-    angles <- diff(bears)
+    angles <- shift_angle(diff(bears))
 
     # Loop over observed steps
     data_list <- lapply(3:n_obs, function(i) {
       # Simulate step lengths and turning angles for random steps
       sim_step <- setup$r_step(n = n_controls, par = setup$par_step)
-      sim_angle <- setup$r_angle(n = n_controls, par = setup$par_angle)
+      sim_angle <- shift_angle(setup$r_angle(n = n_controls,
+                                             par = setup$par_angle))
       # Importance weights
       weights <- setup$d_step(x = sim_step, par = setup$par_step) *
         setup$d_angle(x = sim_angle, par = setup$par_angle)
