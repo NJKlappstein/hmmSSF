@@ -5,7 +5,8 @@ library(ggplot2)
 # load data
 track <- readRDS("inst/sim_data/sim_data.RData")
 cov_data <- readRDS("inst/sim_data/cov_raster.RData")
-track <- track[c(1:200),]
+par <- readRDS("inst/sim_data/sim_par.RData")
+#track <- track[c(1:200),]
 
 # add random locations
 data <- random_locs(obs = track,
@@ -40,12 +41,15 @@ mod <- fitHMMSSF(ssf_formula = ssf_formula,
 
 mod
 confint(mod)
+mod$par
 
 
 states <- viterbi_decoding(mod)
 sp <- local_decoding(mod)
-get_shape_scale(mod)
 
 new_data <- data.frame(tod = 0:24)
 foo <- predict_tpm(mod, new_data = new_data)
 bar <- predict_delta(mod, new_data = new_data)
+
+
+
