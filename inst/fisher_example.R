@@ -41,11 +41,6 @@ ssf_par0 <- matrix(c(-10, -2,
 mod <- fitHMMSSF(ssf_formula = f, n_states = 2, data = data,
                  ssf_par0 = ssf_par0, optim_opts = list(trace = 1))
 
-plot_ssf(mod, "elev")
-
-mod$par
-confint(mod)
-
 ################
 ## Plot track ##
 ################
@@ -59,28 +54,6 @@ ggplot(subset(data, obs == 1), aes(x, y, col = state, group = ID)) +
 #################################
 ## Plot movement distributions ##
 #################################
-step_grid <- seq(min(data$step, na.rm = TRUE),
-                 max(data$step, na.rm = TRUE), length = 1000)
-new_data <- data.frame(step = step_grid, angle = 0, elev = 0)
-ssf_MM <- model.matrix(f, new_data)[,-1]
-par1 <- mod$par$ssf[,1]
-par2 <- mod$par$ssf[,2]
-new_data$pred1 <- exp(ssf_MM %*% par1)
-new_data$pred2 <- exp(ssf_MM %*% par2)
-new_data$pred1 <- new_data$pred1 / sum(new_data$pred1)
-new_data$pred2 <- new_data$pred2 / sum(new_data$pred2)
-ggplot(new_data, aes(step, pred1)) +
-  geom_line(col = "firebrick") +
-  geom_line(aes(step, pred2), col = "royalblue")
-
-angle_grid <- seq(-pi, pi, length = 100)
-new_data <- data.frame(step = 1, angle = angle_grid, elev = 0)
-ssf_MM <- model.matrix(f, new_data)[,-1]
-new_data$pred1 <- exp(ssf_MM %*% par1)
-new_data$pred2 <- exp(ssf_MM %*% par2)
-new_data$pred1 <- new_data$pred1 / sum(new_data$pred1)
-new_data$pred2 <- new_data$pred2 / sum(new_data$pred2)
-ggplot(new_data, aes(angle, pred1)) +
-  geom_line(col = "firebrick") +
-  geom_line(aes(angle, pred2), col = "royalblue")
-
+plot_ssf(mod, "step")
+plot_ssf(mod, "angle")
+plot_ssf(mod, "elev")
