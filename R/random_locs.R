@@ -37,6 +37,8 @@ random_locs <- function(obs,
       # Importance weights
       weights <- setup$d_step(x = sim_step, par = setup$par_step) *
         setup$d_angle(x = sim_angle, par = setup$par_angle)
+      weight_obs <- setup$d_step(x = steps[i-1], par = setup$par_step) *
+        setup$d_angle(x = angles[i-2], par = setup$par_angle)
       # Derive coordinates of random points
       sim_bear <- bears[i-2] + sim_angle
       pts <- rep(xy[i-1,], each = n_controls) +
@@ -51,7 +53,7 @@ random_locs <- function(obs,
                  angle = c(angles[i-2], sim_angle),
                  time = as.POSIXct(sub_obs$time[i],
                                    tz = attr(sub_obs$time, "tzone")),
-                 w = c(NA, weights))
+                 w = c(weight_obs, weights))
     })
 
     # Add data for this ID to data frame

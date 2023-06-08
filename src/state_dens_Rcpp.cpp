@@ -24,7 +24,8 @@ arma::mat state_dens_rcpp(arma::mat linear_pred,
       ssf_obs = exp(linear_pred.row(i));
 
       // set first value of the controls to the obs to include in denom
-      ssf_denom.zeros();
+      ssf_denom = ssf_obs / sampling_densities(i);
+      // ssf_denom.zeros();
       n_controls = 0;
 
     } else if(stratum(i) != stratum(i-1)) {
@@ -32,7 +33,8 @@ arma::mat state_dens_rcpp(arma::mat linear_pred,
       ssf_obs = exp(linear_pred.row(i));
 
       // set first value of the controls to the obs to include in denom
-      ssf_denom.zeros();
+      ssf_denom = ssf_obs / sampling_densities(i);
+      // ssf_denom.zeros();
       n_controls = 0;
     } else {
       // calculate the ssf of the control location and add it to denominator
