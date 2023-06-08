@@ -1,6 +1,7 @@
 library(raster)
 library(tictoc)
 library(hmmSSF)
+library(pbmcapply)
 source("inst/functions/simHMMSSF.R")
 source("inst/functions/cov_df.R")
 source("inst/functions/simRaster.R")
@@ -24,7 +25,7 @@ n_states <- 2
 # set parameters
 betas <- matrix(c(-10, -1,
                   -1, 5,
-                  3, 0),
+                  3, -3),
                 ncol = n_states,
                 byrow = TRUE)
 
@@ -39,21 +40,15 @@ par <- list(betas = betas,
 
 # set simulation settings
 n_zeros <- 1e4
-n_obs <- 500
+n_obs <- 1000
 rmax <- 5
-n_iter <- 30
+n_iter <- 50
 time <- data.frame(time = seq(as.POSIXct("2020-01-01 0:00", tz = "UTC"),
                               by = "hour", length.out = n_obs))
 time$tod <- lubridate::hour(time$time)
 
 out <- list()
-t0 <- Sys.time()
-for(i in 1:n_iter) {
-  cat("Iteration", i, "of", n_iter, "\n")
-
-  # set seed so I can recreate each track if needed
-  set.seed(i + 8375)
-
+out <- pbmclapply(1:n_iter, function(i) {
   # get initial location for track
   y1 <-  c(runif(1, c(-rl*0.5, rl*0.5)),
            runif(1, c(-rl*0.5, rl*0.5)))
@@ -79,7 +74,7 @@ for(i in 1:n_iter) {
   # set starting values for ssf
   ssf_par0 <- matrix(c(-8, -2,
                        0, 2,
-                       0, 0),
+                       2, -2),
                      ncol = n_states,
                      byrow = TRUE)
 
@@ -93,8 +88,8 @@ for(i in 1:n_iter) {
 
   # generate controls
   data <- random_locs(obs = track,
-                      n_controls = 30,
-                      distr = "gamma")
+                      n_controls = 200,
+                      distr = c("gamma", "vm"))
 
   # get covariates
   data$cov1 <- extract(cov_data$cov1, as.matrix(data[, c("x", "y")]))
@@ -111,9 +106,8 @@ for(i in 1:n_iter) {
                    optim_opts = list(maxit = 1e4))
 
   # put all data into data frame
-  out[[i]] <- fit$par
-  cat("Time elapsed:", Sys.time() - t0, "\n")
-}
+  return(fit$par)
+}, mc.cores = 4)
 
 par(mfrow = c(3, 2))
 for(k in 1:3) {
