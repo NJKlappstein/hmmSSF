@@ -1,0 +1,26 @@
+[general]
+creator=R package 'raster'
+created=2018-10-25 11:54:26
+[georeference]
+nrows=1510
+ncols=1686
+xmin=467.496403989308
+ymin=7885.15
+xmax=518.077096867829
+ymax=7930.45
+projection=+proj=utm +zone=35 +south +datum=WGS84 +units=km +no_defs +ellps=WGS84 +towgs84=0,0,0
+[data]
+datatype=FLT4S
+byteorder=little
+nbands=1
+bandorder=BIL
+categorical=FALSE
+minvalue=1
+maxvalue=4
+nodatavalue=-3.4e+38
+[legend]
+legendtype=
+values=
+color=
+[description]
+layername=HNP_Veg_Struct_Map_2013.2014_FINAL_utm35S
