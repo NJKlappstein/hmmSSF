@@ -1,4 +1,6 @@
+library(raster)
 library(tictoc)
+library(hmmSSF)
 source("inst/functions/simHMMSSF.R")
 source("inst/functions/cov_df.R")
 source("inst/functions/simRaster.R")
@@ -58,7 +60,7 @@ rmax <- 5
 n_iter <- 50
 time <- data.frame(time = seq(as.POSIXct("2020-01-01 0:00", tz = "UTC"),
                               by = "hour", length.out = n_obs))
-time$tod <- as.numeric(substr(time$time, 12, 13))
+time$tod <- lubridate::hour(time$time)
 
 #initialise arrays for parameters
 ssf  <- NULL
@@ -97,9 +99,9 @@ for(i in 1:n_iter) {
   # set starting values for ssf
   step_beta0    <- c(runif(1, -6, -2), runif(1, -3, -1))
   logstep_beta0 <- c(runif(1, -1, 1), runif(1, 0, 2))
-  angle_beta0   <- c(runif(1, 0, 1), runif(1, 1, 5))
-  cov1_beta0    <- c(runif(1, 1, 5), runif(1, 0, 4))
-  cov2_beta0    <- c(runif(1, 0, 4), runif(1, 1, 5))
+  angle_beta0   <- c(0, 5)
+  cov1_beta0    <- c(0, 0)
+  cov2_beta0    <- c(0, 0)
 
   ssf_par0 <- matrix(c(step_beta0,
                        logstep_beta0,
@@ -111,8 +113,8 @@ for(i in 1:n_iter) {
 
   # set tpm starting values
   tpm_par0 <- matrix(c(-2, -2,
-                       runif(1, 0, 1.5), runif(1, -3, -1),
-                       runif(1, 0, 0.5), runif(1, 0, 2)),
+                       0, 0,
+                       0, 0),
                      ncol = n_states^2 - n_states,
                      byrow = TRUE)
 
@@ -125,7 +127,7 @@ for(i in 1:n_iter) {
   # get covariates
   data$cov1 <- extract(cov_data$cov1, as.matrix(data[, c("x", "y")]))
   data$cov2 <- extract(cov_data$cov2, as.matrix(data[, c("x", "y")]))
-  data$tod <- as.numeric(substr(data$time, 12, 13))
+  data$tod <- lubridate::hour(data$time)
 
   # fit HMM-SSF
   fit <- fitHMMSSF(ssf_formula = ssf_formula,
@@ -133,7 +135,8 @@ for(i in 1:n_iter) {
                    n_states = n_states,
                    data = data,
                    ssf_par0 = ssf_par0,
-                   tpm_par0 = tpm_par0)
+                   tpm_par0 = tpm_par0,
+                   optim_opts = list(trace = 1))
 
   # put all data into data frame
   ssf_est <- data.frame(track = i,
@@ -161,76 +164,76 @@ for(i in 1:n_iter) {
   vit <- rbind(vit, decode)
 }
 toc()
-
-write.csv(ssf, "results/simulations/csv_out/ssf_est.csv", row.names = F)
-write.csv(tpm, "results/simulations/csv_out/tpm_est.csv", row.names = F)
-write.csv(vit, "results/simulations/csv_out/vit_est.csv", row.names = F)
-
-
-betas_out <- read.csv("results/simulations/csv_out/TPM_sim_betas.csv")
-alphas_out <- read.csv("results/simulations/csv_out/TPM_sim_alphas.csv")
-decoding <- read.csv("results/simulations/csv_out/TPM_decode.csv")
-
-
-betas_out$se <- (betas_out$upper - betas_out$estimate) / 1.96
-betas_out$cov <- factor(betas_out$cov,
-                        levels = c("step", "log(step)", "cos(angle)", "cov1", "cov2"))
-b_summary <- betas_out %>%
-  group_by(state, cov) %>%
-  summarise(mean_se = mean(se),
-            est_sd = sd(estimate),
-            median = median(estimate),
-            mean = mean(estimate))
-b_summary$truth <- as.vector(par$betas)
-b_summary$bias <- (b_summary$truth - b_summary$mean) / b_summary$truth
-b_summary
-
-
-mean(decoding$decoded)
-
-alphas_out$se <- (alphas_out$upper - alphas_out$estimate) / 1.96
-a_summary <- alphas_out %>%
-  group_by(transition, cov) %>%
-  summarise(mean_se = mean(se),
-            est_sd = sd(estimate),
-            median = median(estimate),
-            mean = mean(estimate))
-a_summary$truth <- as.vector(par$alphas)
-a_summary$bias <- (a_summary$truth - a_summary$mean) / a_summary$truth
-a_summary
-
-
-alphas_out %>% group_by(transition, cov) %>%
-  summarise(mean = mean(estimate), median = median(estimate))
-sim_par$alphas
-
-
-#############################
-##### covariate plots ######
-###########################
-cov1_plot <- data.frame(coordinates(cov1),
-                        val = values(cov1),
-                        cov = "covariate 1")
-cov2_plot <- data.frame(coordinates(cov2),
-                        val = values(cov2),
-                        cov = "covariate 2")
-cov_plot <- rbind(cov1_plot, cov2_plot)
-cov_plot <- subset(cov_plot, x <= 25 & x >= -25)
-cov_plot <- subset(cov_plot, y <= 25 & y >= -25)
-
-pdf(file = "writing/figures/sim_hab.pdf", width = 6, height = 3)
-ggplot(cov_plot, aes(x, y)) +
-  geom_raster(aes(fill = val)) +
-  facet_wrap("cov") +
-  coord_equal() +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  scale_fill_scico(palette = "davos") +
-  theme(legend.title = element_blank(),
-        strip.background = element_blank(),
-        strip.text = element_text(size = 12))
-dev.off()
-
+#
+# write.csv(ssf, "results/simulations/csv_out/ssf_est.csv", row.names = F)
+# write.csv(tpm, "results/simulations/csv_out/tpm_est.csv", row.names = F)
+# write.csv(vit, "results/simulations/csv_out/vit_est.csv", row.names = F)
+#
+#
+# betas_out <- read.csv("results/simulations/csv_out/TPM_sim_betas.csv")
+# alphas_out <- read.csv("results/simulations/csv_out/TPM_sim_alphas.csv")
+# decoding <- read.csv("results/simulations/csv_out/TPM_decode.csv")
+#
+#
+# betas_out$se <- (betas_out$upper - betas_out$estimate) / 1.96
+# betas_out$cov <- factor(betas_out$cov,
+#                         levels = c("step", "log(step)", "cos(angle)", "cov1", "cov2"))
+# b_summary <- betas_out %>%
+#   group_by(state, cov) %>%
+#   summarise(mean_se = mean(se),
+#             est_sd = sd(estimate),
+#             median = median(estimate),
+#             mean = mean(estimate))
+# b_summary$truth <- as.vector(par$betas)
+# b_summary$bias <- (b_summary$truth - b_summary$mean) / b_summary$truth
+# b_summary
+#
+#
+# mean(decoding$decoded)
+#
+# alphas_out$se <- (alphas_out$upper - alphas_out$estimate) / 1.96
+# a_summary <- alphas_out %>%
+#   group_by(transition, cov) %>%
+#   summarise(mean_se = mean(se),
+#             est_sd = sd(estimate),
+#             median = median(estimate),
+#             mean = mean(estimate))
+# a_summary$truth <- as.vector(par$alphas)
+# a_summary$bias <- (a_summary$truth - a_summary$mean) / a_summary$truth
+# a_summary
+#
+#
+# alphas_out %>% group_by(transition, cov) %>%
+#   summarise(mean = mean(estimate), median = median(estimate))
+# sim_par$alphas
+#
+#
+# #############################
+# ##### covariate plots ######
+# ###########################
+# cov1_plot <- data.frame(coordinates(cov1),
+#                         val = values(cov1),
+#                         cov = "covariate 1")
+# cov2_plot <- data.frame(coordinates(cov2),
+#                         val = values(cov2),
+#                         cov = "covariate 2")
+# cov_plot <- rbind(cov1_plot, cov2_plot)
+# cov_plot <- subset(cov_plot, x <= 25 & x >= -25)
+# cov_plot <- subset(cov_plot, y <= 25 & y >= -25)
+#
+# pdf(file = "writing/figures/sim_hab.pdf", width = 6, height = 3)
+# ggplot(cov_plot, aes(x, y)) +
+#   geom_raster(aes(fill = val)) +
+#   facet_wrap("cov") +
+#   coord_equal() +
+#   scale_x_continuous(expand = c(0, 0)) +
+#   scale_y_continuous(expand = c(0, 0)) +
+#   scale_fill_scico(palette = "davos") +
+#   theme(legend.title = element_blank(),
+#         strip.background = element_blank(),
+#         strip.text = element_text(size = 12))
+# dev.off()
+#
 
 
 

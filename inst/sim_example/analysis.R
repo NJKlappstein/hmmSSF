@@ -1,5 +1,6 @@
 
 library(hmmSSF)
+library(raster)
 
 # load data
 load("inst/sim_example/sim_data.RData")
@@ -26,3 +27,5 @@ mod <- fitHMMSSF(ssf_formula = ssf_formula,
                  data = data,
                  ssf_par0 = ssf_par0,
                  optim_opts = list(trace = 1, maxit = 1e4))
+
+mod
