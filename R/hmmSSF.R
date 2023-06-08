@@ -15,13 +15,13 @@
 #'
 #' @useDynLib hmmSSF
 
-fitHMMSSF <- function(ssf_formula,
-                      tpm_formula = ~1,
-                      n_states,
-                      data,
-                      ssf_par0,
-                      tpm_par0 = NULL,
-                      optim_opts = list(trace = 0, maxit = 5e4)) {
+hmmSSF <- function(ssf_formula,
+                   tpm_formula = ~1,
+                   n_states,
+                   data,
+                   ssf_par0,
+                   tpm_par0 = NULL,
+                   optim_opts = list(trace = 0, maxit = 5e4)) {
 
   # order data
   data <- data[order(data$ID, data$stratum, -data$obs),]

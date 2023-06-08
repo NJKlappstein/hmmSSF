@@ -3,10 +3,15 @@
 #' @param obs Data frame of observations (ID, x, y, time)
 #' @param n_controls Number of control steps ("controls") per observation
 #' @param distr Name(s) of distribution(s) used to generate control steps.
+#' Spatially uniform ("uniform") points are the default. Otherwise, the distributions
+#' should be entered as a vector of the step length and turning angle distributions
+#' (in that order). If only one distribution is entered, this is used as the
+#' step length distribution. Current options for step length: "gamma", "exponential".
+#' Current options for turning angle: "vm", "uniform", "wrpcauchy".
 #'
 #' @export
 
-random_locs <- function(obs,
+get_controls <- function(obs,
                         n_controls,
                         distr = "uniform")
 {
