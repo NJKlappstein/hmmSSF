@@ -57,7 +57,8 @@ par <- list(betas = betas,
 n_zeros <- 1e4
 n_obs <- 750
 rmax <- 5
-n_iter <- 50
+n_iter <- 100
+n_controls <- 25
 time <- data.frame(time = seq(as.POSIXct("2020-01-01 0:00", tz = "UTC"),
                               by = "hour", length.out = n_obs))
 time$tod <- lubridate::hour(time$time)
@@ -72,7 +73,7 @@ for(i in 1:n_iter) {
   cat("\rIteration", i, "of", n_iter)
 
   # set seed so I can recreate each track if needed
-  set.seed(i + 501)
+  set.seed(i + 500)
 
   # get initial location for track
   y1 <-  c(runif(1, c(-rl*0.5, rl*0.5)),
@@ -121,7 +122,7 @@ for(i in 1:n_iter) {
 
   # generate controls
   data <- random_locs(obs = track,
-                      n_controls = 35,
+                      n_controls = n_controls,
                       distr = "gamma")
 
   # get covariates
@@ -135,8 +136,7 @@ for(i in 1:n_iter) {
                    n_states = n_states,
                    data = data,
                    ssf_par0 = ssf_par0,
-                   tpm_par0 = tpm_par0,
-                   optim_opts = list(trace = 1))
+                   tpm_par0 = tpm_par0)
 
   # put all data into data frame
   ssf_est <- data.frame(track = i,
@@ -164,15 +164,11 @@ for(i in 1:n_iter) {
   vit <- rbind(vit, decode)
 }
 toc()
-#
-# write.csv(ssf, "results/simulations/csv_out/ssf_est.csv", row.names = F)
-# write.csv(tpm, "results/simulations/csv_out/tpm_est.csv", row.names = F)
-# write.csv(vit, "results/simulations/csv_out/vit_est.csv", row.names = F)
-#
-#
-# betas_out <- read.csv("results/simulations/csv_out/TPM_sim_betas.csv")
-# alphas_out <- read.csv("results/simulations/csv_out/TPM_sim_alphas.csv")
-# decoding <- read.csv("results/simulations/csv_out/TPM_decode.csv")
+
+ write.csv(ssf, "inst/sim_study/ssf_est.csv", row.names = F)
+ write.csv(tpm, "inst/sim_study/tpm_est.csv", row.names = F)
+ write.csv(vit, "inst/sim_study/vit_est.csv", row.names = F)
+
 #
 #
 # betas_out$se <- (betas_out$upper - betas_out$estimate) / 1.96
