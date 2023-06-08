@@ -52,7 +52,7 @@ rmax <- 5
 n_iter <- 100
 time <- data.frame(time = seq(as.POSIXct("2020-01-01 0:00", tz = "UTC"),
                               by = "hour", length.out = n_obs))
-time$tod <- as.numeric(substr(time$time, 12, 13))
+time$tod <- lubridate::hour(time$time)
 
 # simulate track
 track <- simHMMSSF(ssf_formula = ssf_formula,
@@ -78,24 +78,26 @@ track <- data.frame(ID = 1,
                     time = track$time,
                     state = track$state)
 
+# save(track, file = "data/track.RData")
+# save(cov1, file = "data/cov1.RData")
 
-saveRDS(track, file = "inst/sim_data/sim_data.RData")
-saveRDS(cov1, file = "inst/sim_data/cov_raster.RData")
-saveRDS(par, file = "inst/sim_data/sim_par.RData")
-
-# plot data
-covmap <- data.frame(coordinates(cov1), val = values(cov1))
-
-ggplot(covmap, aes(x, y)) +
-  geom_raster(aes(fill = val)) +
-  coord_equal() +
-  xlab("Easting (km)") +
-  ylab("Northing (km)") +
-  scale_fill_viridis_c(option = "mako", guide = "none") +
-  xlim(c(-150, 150)) + ylim(c(-150, 150)) +
-  geom_path(aes(x, y), track, size = 0.35, color = "burlywood1", alpha = 0.6) +
-  geom_point(aes(x, y), track, size = 0.2, color = "burlywood1", alpha = 0.6) +
-  theme(legend.key.size = unit(1.4, "lines"))
+# saveRDS(track, file = "inst/sim_data/sim_data.RData")
+# saveRDS(cov1, file = "inst/sim_data/cov_raster.RData")
+# saveRDS(par, file = "inst/sim_data/sim_par.RData")
+#
+# # plot data
+# covmap <- data.frame(coordinates(cov1), val = values(cov1))
+#
+# ggplot(covmap, aes(x, y)) +
+#   geom_raster(aes(fill = val)) +
+#   coord_equal() +
+#   xlab("Easting (km)") +
+#   ylab("Northing (km)") +
+#   scale_fill_viridis_c(option = "mako", guide = "none") +
+#   xlim(c(-150, 150)) + ylim(c(-150, 150)) +
+#   geom_path(aes(x, y), track, size = 0.35, color = "burlywood1", alpha = 0.6) +
+#   geom_point(aes(x, y), track, size = 0.2, color = "burlywood1", alpha = 0.6) +
+#   theme(legend.key.size = unit(1.4, "lines"))
 
 
 
