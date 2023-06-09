@@ -15,7 +15,7 @@ tracks <- data.frame(ID = amt_fisher$id,
                      time = amt_fisher$t_)
 tracks <- subset(tracks, ID %in% unique(ID)[c(1, 3)])
 n_random <- 50
-data <- random_locs(obs = tracks, n_controls = n_random, distr = "gamma")
+data <- get_controls(obs = tracks, n_controls = n_random, distr = "gamma")
 
 elev <- unwrap(amt_fisher_covar$elevation)
 data$elev <- extract(elev, data[, c("x", "y")])$elevation
@@ -41,10 +41,10 @@ ssf_par0 <- matrix(c(-10, -2,
                      0.5, 2,
                      0, 0),
                    ncol = 2, byrow = TRUE)
-mod <- fitHMMSSF(ssf_formula = f, tpm_formula = f2,
-                 n_states = 2, data = data,
-                 ssf_par0 = ssf_par0,
-                 optim_opts = list(trace = 1, maxit = 500))
+mod <- hmmSSF(ssf_formula = f, tpm_formula = f2,
+              n_states = 2, data = data,
+              ssf_par0 = ssf_par0,
+              optim_opts = list(trace = 1, maxit = 500))
 
 ################
 ## Plot track ##
