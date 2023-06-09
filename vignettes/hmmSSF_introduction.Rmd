@@ -15,8 +15,8 @@ bibliography: refs.bib
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-message = FALSE, error = FALSE, warning = FALSE,
-comment = NA
+  message = FALSE, error = FALSE, warning = FALSE,
+  comment = NA
 )
 set.seed(4258)
 ```
@@ -24,7 +24,19 @@ set.seed(4258)
 \tableofcontents
 
 \newpage
-We describe the analysis workflow for the R package hmmSSF, which implements state-switching step selection functions as described by @klappstein2023 (and originally proposed by @nicosia2017).
+We describe the analysis workflow for the R package hmmSSF, which implements state-switching step selection functions as described by @klappstein2023 (and originally proposed by @nicosia2017). This package can be used to estimate behaviour-dependent habitat selection and movement parameters, bringing together hidden Markov models (@michelot2016) and step selection functions (@signer2019).
+
+# Word of caution
+
+This model is fairly complex compared to standard step selection functions, and requires more care to avoid numerical problems. Indeed, the number of parameters is higher, and the problem of inference requires estimating the dynamics of an unobserved state process (used as proxy for the behavioural state of the animal). 
+
+In our experience, this model complexity often leads to numerical instability, i.e., failure of the fitting function to converge to the best parameter estimates. This is a difficult general problem, and here are some possible directions to explore to help with it:
+
+- increase the number of control locations (see "Generating control step" below)
+
+- use a simpler model formulation. The more complex the model, the more difficult it is to fit. It is usually good to start from the simplest model, i.e., a 2-state model with no covariates on the transition probabilities, and build up complexity if it seems possible.
+
+- try different sets of starting values for the parameters (see "Starting parameter values" below)
 
 # Data preparation
 
@@ -35,6 +47,7 @@ library(raster)
 library(hmmSSF)
 library(terra)
 library(ggplot2)
+theme_set(theme_bw())
 
 # transform from raster to terra format
 cov1 <- rast(cov1)
@@ -87,7 +100,7 @@ The number of control steps also needs to be specified, with larger numbers lead
 For this example, we decide to generate 50 control locations per observed step, using a gamma distribution of distances. The output has the same columns as the original data frame, and a few new ones: \texttt{stratum} identifies the stratum to which a location belongs, and \texttt{obs} is a binary variable indicating whether a location is observed or not.
 
 ```{r get-controls}
-data <- random_locs(obs = track, n_controls = 50, distr = "gamma")
+data <- get_controls(obs = track, n_controls = 50, distr = "gamma")
 
 head(data)
 ```
@@ -104,6 +117,8 @@ data$cov1 <- extract(cov1, data[,c("x", "y")])$layer
 
 # Model specification and model fitting
 
+## Model formulation
+
 The main modelling decisions are the choice of the number of states in the HMM, and the choice of the SSF formula within each state. 
 
 There is no general method to select the best number of states, and we recommend leaning towards fewer states (2 or 3) in most applications to avoid numerical problems. (See also @pohle2017 for a discussion of this issue.) Here, we use two states, which we hope can separate slow and fast movement phases.
@@ -118,27 +133,46 @@ n_states <- 2
 ssf_formula <- ~ step + log(step) + cos(angle) + cov1
 ```
 
-In hmmSSF, the model is fitted through numerical likelihood optimisation, and starting values need to be chosen for the model parameters. The choice of these values does not affect the model specification, but poorly chosen values can lead to numerical problems (e.g., failure of optimiser to converge). The general idea is that, if starting values are close to the "true" parameters, it will be easier for the optimiser to converge. In practice, the true parameters are not known, and so our best bet is to choose plausible values given the data. Here, we use the fact that the selection parameters for \texttt{step} and \texttt{log(step)} are linked to parameters of a gamma distribution, and the parameter for \texttt{cos(angle)} is the concentration of a von Mises distribution (@klappstein2023).
+## Starting parameter values
+
+In hmmSSF, the model is fitted through numerical likelihood optimisation, and starting values need to be chosen for the model parameters. The choice of these values does not affect the model specification, but poorly chosen values can lead to numerical problems (e.g., failure of optimiser to converge). The general idea is that, if starting values are close to the "true" parameters, it will be easier for the optimiser to converge. In practice, the true parameters are not known, and so our best bet is to choose plausible values given the data. 
+
+Here, we use the fact that the selection parameters for \texttt{step} and \texttt{log(step)} are linked to the mean $\mu_L$ and standard deviation $\sigma_L$ of a gamma distribution through the relationships:
+$$
+  \beta_L = - \frac{\mu_L}{\sigma_L^2}, \quad \beta_{\log(L)} = \frac{\mu_L^2}{\sigma_L^2} - 2.
+$$
+We can choose some hypothesised mean step length for each state by looking at the empirical distribution, and transform them using these formulas to get starting values for the selection coefficients. To visualise step lengths, we subset the data to observed steps (i.e., removing control steps).
+
+```{r plot-step, fig.width = 5, fig.height = 3, out.width="60%", fig.align = "center"}
+ggplot(subset(data, obs == 1), aes(x = step)) +
+  geom_histogram(col = "white", fill = "grey", bins = 20)
+```
+
+We might want state 1 to capture slow movement (e.g., steps between 0 and 1km), and state 2 to capture faster movement (e.g., steps between 1 and 3km), so we choose a mean of 0.2km for state 1 and 2km for state 2. We use the same value as the mean for the standard deviation in each state. Plugging these values into the above equations yields (-5, -0.5) for $\beta_L$, and (-1, -1) for $\beta_{\log(L)}$.
+
+Similarly, the selection parameter for \texttt{cos(angle)} is the concentration of a von Mises distribution (@klappstein2023). The larger the concentration, the more peaked the distribution is around zero, i.e., the more directed the movement. We choose a starting value of 0.2 in state 1 and 5 in state 2, based on the expectation that slow movement is less directional than fast movement.
 
 The parameters should be passed as a matrix, with one row for each covariate in the formula (here, 4), and one column for each state (here, 2).
 
 ```{r init-par}
 # initial values for SSF parameters
-ssf_par0 <- matrix(c(-3, -1,
-                     -1, 2,
+ssf_par0 <- matrix(c(-5, -0.5,
+                     -1, -1,
                      0.2, 5,
                      3, -1),
                    ncol = 2, byrow = TRUE)
 ```
 
+## Model fitting
+
 Finally, we can pass the model formulation, the data, and the starting parameter values to the function \texttt{fitHMMSSF()} for model fitting.
 
 ```{r mod-fit}
 # fit model
-mod <- fitHMMSSF(ssf_formula = ssf_formula,
-                 n_states = n_states,
-                 data = data,
-                 ssf_par0 = ssf_par0)
+mod <- hmmSSF(ssf_formula = ssf_formula,
+              n_states = n_states,
+              data = data,
+              ssf_par0 = ssf_par0)
 ```
 
 The fitted model object can then be printed to find the estimated parameter values.
@@ -185,6 +219,25 @@ ggplot(df, aes(x, y, col = state, group = NA)) +
 
 # Covariates on transition probabilities
 
-The effects of covariates on the transition probabilities of the hidden process can be included with the argument \texttt{tpm\_formula}. @klappstein2023 describes this model, and discusses when a variable should be included in this part of the model (rather than in the SSF directly, say).
+The effects of covariates on the transition probabilities of the hidden process can be included with the argument \texttt{tpm\_formula}. @klappstein2023 describes this model, and discusses when a variable should be included in this part of the model (rather than in the SSF directly, say). Briefly, this option is useful to answer questions such as "Does this covariate affect the proportion of time spent in the different behaviours?". 
+
+We add a column \texttt{tod} to the data frame, which is a numeric variable for the time of day. To include its effect on the transition probabilities, we define a formula with cyclical effects (with period = 24), based on trigonometric functions (@leos).
+
+```{r mod-tpm}
+data$tod <- lubridate::hour(data$time) + lubridate::minute(data$time) / 60
+
+tpm_formula <- ~ cos(2 * pi * tod / 24) + sin(2 * pi * tod / 24)
+
+mod2 <- hmmSSF(ssf_formula = ssf_formula, 
+               tpm_formula = tpm_formula, 
+               n_states = 2, 
+               data = data, 
+               ssf_par0 = ssf_par0)
+
+mod2
+
+new_data <- data.frame(tod = seq(0, 24, length = 100))
+tpm <- predict_tpm(mod = mod2, new_data = new_data)
+```
 
 # References
