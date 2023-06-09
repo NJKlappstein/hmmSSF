@@ -4,16 +4,20 @@ R package to fit state-switching step selection functions (HMM-SSFs) with covari
 
 The HMM-SSF is a hidden Markov model, where the (behavioural) states are defined by a movement and habitat selection model (i.e., an SSF). In `hmmSSF`, the model is implemented using importance sampling and direct numerical optimisation via the forward algorithm. The package also contains tools to plot results, and conduct local and global decoding of the state process.
 
-Get started with the main vignette: 
+### Vignette
 
-[Fit state-switching step selection functions in hmmSSF](https://github.com/NJKlappstein/hmmSSF/blob/main/vignettes/hmmSSF_introduction.pdf)
+The best place to get started is the vignette, which describes all steps of analysis, from data preparation to model visualisation.
+
+[Vignette: "Fit state-switching step selection functions in hmmSSF"](https://github.com/NJKlappstein/hmmSSF/blob/main/vignettes/hmmSSF_introduction.pdf)
 
 ### Installation
-You can install the package with `devtools`:
+
+You can install the package from Github with `devtools`:
 ```{r}
-devtools::install_git("NJKlappstein/hmmSSF")
+devtools::install_github("NJKlappstein/hmmSSF")
 ```
 
+Note that the package is under development, so please keep an eye out for future versions (particularly for bug fixes!)
 
 ### References
 
