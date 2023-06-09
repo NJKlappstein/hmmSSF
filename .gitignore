@@ -4,3 +4,4 @@
 .Ruserdata
 src/*.o
 src/*.so
+.DS_Store
