@@ -4,7 +4,7 @@
 \alias{confint.hmmSSF}
 \title{Calculate CIs for the HMM-SSF parameters via the Hessian matrix}
 \usage{
-\method{confint}{hmmSSF}(mod, range = 0.95)
+\method{confint}{hmmSSF}(mod, range = 0.95, pretty = FALSE)
 }
 \arguments{
 \item{mod}{Fitted model output returned by \code{\link{fitHMMSSF}}}

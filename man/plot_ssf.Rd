@@ -2,10 +2,15 @@
 % Please edit documentation in R/plot_ssf.R
 \name{plot_ssf}
 \alias{plot_ssf}
-\title{Plot SSF}
+\title{Plot RSS}
 \usage{
 plot_ssf(mod, var)
 }
+\arguments{
+\item{mod}{Fitted model returned by \code{\link{fitHMMSSF}}}
+
+\item{var}{Name of variable to plot SSF against}
+}
 \description{
-Plot SSF
+Plot RSS
 }
