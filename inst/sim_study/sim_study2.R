@@ -13,8 +13,8 @@ source("inst/functions/simRaster.R")
 # simulate covariate data
 rl <- 2000 # set raster limit
 set.seed(435363)
-cov1 <- simRaster(rho = 3, lim = c(-rl, rl, -rl, rl))
-cov2 <- simRaster(rho = 3, lim = c(-rl, rl, -rl, rl))
+cov1 <- simRaster(rho = 11, lim = c(-rl, rl, -rl, rl))
+cov2 <- simRaster(rho = 1, lim = c(-rl, rl, -rl, rl))
 cov_data <- list("cov1" = cov1, "cov2" = cov2)
 
 # set model formulation
@@ -25,7 +25,7 @@ n_states <- 2
 # set parameters
 betas <- matrix(c(-10, -1,
                   -1, 5,
-                  3, -3),
+                  10, -10),
                 ncol = n_states,
                 byrow = TRUE)
 
@@ -38,9 +38,9 @@ par <- list(betas = betas,
 
 # set simulation settings
 n_zeros <- 1e4
-n_obs <- 1000
+n_obs <- 2000
 rmax <- 5
-n_iter <- 50
+n_iter <- 100
 time <- data.frame(time = seq(as.POSIXct("2020-01-01 0:00", tz = "UTC"),
                               by = "hour", length.out = n_obs))
 time$tod <- lubridate::hour(time$time)
