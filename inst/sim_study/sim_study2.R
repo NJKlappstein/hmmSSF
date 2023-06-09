@@ -19,7 +19,7 @@ cov_data <- list("cov1" = cov1, "cov2" = cov2)
 
 # set model formulation
 ssf_formula <- ~ step + cos(angle) + cov1
-tpm_formula <- ~ cos(2 * pi * tod / 24) + sin(2 * pi * tod / 24)
+tpm_formula <- ~ 1
 n_states <- 2
 
 # set parameters
@@ -29,9 +29,7 @@ betas <- matrix(c(-10, -1,
                 ncol = n_states,
                 byrow = TRUE)
 
-alphas <- matrix(c(-2.2, -2.2,
-                   0.75, -2,
-                   0.1, 1),
+alphas <- matrix(c(-2.2, -2.2),
                  ncol = n_states^2 - n_states,
                  byrow = TRUE)
 
@@ -73,23 +71,20 @@ out <- pbmclapply(1:n_iter, function(i) {
 
   # set starting values for ssf
   ssf_par0 <- matrix(c(-8, -2,
-                       0, 2,
-                       2, -2),
+                       0, 4,
+                       0, 0),
                      ncol = n_states,
                      byrow = TRUE)
 
   # set tpm starting values
-  tpm_par0 <- matrix(c(-2, -2,
-                       0, 0,
-                       0, 0),
+  tpm_par0 <- matrix(c(-2, -2),
                      ncol = n_states^2 - n_states,
                      byrow = TRUE)
 
-
   # generate controls
-  data <- random_locs(obs = track,
-                      n_controls = 200,
-                      distr = c("gamma", "vm"))
+  data <- get_controls(obs = track,
+                       n_controls = 50,
+                       distr = c("gamma", "vm"))
 
   # get covariates
   data$cov1 <- extract(cov_data$cov1, as.matrix(data[, c("x", "y")]))
@@ -97,13 +92,12 @@ out <- pbmclapply(1:n_iter, function(i) {
   data$tod <- lubridate::hour(data$time)
 
   # fit HMM-SSF
-  fit <- fitHMMSSF(ssf_formula = ssf_formula,
-                   tpm_formula = tpm_formula,
-                   n_states = n_states,
-                   data = data,
-                   ssf_par0 = ssf_par0,
-                   tpm_par0 = tpm_par0,
-                   optim_opts = list(maxit = 1e4))
+  fit <- hmmSSF(ssf_formula = ssf_formula,
+                tpm_formula = tpm_formula,
+                n_states = n_states,
+                data = data,
+                ssf_par0 = ssf_par0,
+                tpm_par0 = tpm_par0)
 
   # put all data into data frame
   return(fit$par)
@@ -112,15 +106,17 @@ out <- pbmclapply(1:n_iter, function(i) {
 par(mfrow = c(3, 2))
 for(k in 1:3) {
   for(l in 1:2) {
-    hist(sapply(out, function(m) m$ssf[k,l]), main = "")
+    hist(sapply(out, function(m) m$ssf[k,l]), xlab = "",
+         main = paste0(rownames(out[[1]]$ssf)[k], ".",
+                       colnames(out[[1]]$ssf)[l]))
     abline(v = betas[k,l], col = "firebrick", lwd = 2)
   }
 }
 
-par(mfrow = c(2, 2))
-for(k in 1:2) {
-  for(l in 1:2) {
-    hist(sapply(out, function(m) m$tpm[k,l]), main = "")
-    abline(v = alphas[k,l], col = "firebrick", lwd = 2)
-  }
-}
+# par(mfrow = c(2, 2))
+# for(k in 1:2) {
+#   for(l in 1:2) {
+#     hist(sapply(out, function(m) m$tpm[k,l]), main = "")
+#     abline(v = alphas[k,l], col = "firebrick", lwd = 2)
+#   }
+# }
