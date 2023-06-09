@@ -15,7 +15,7 @@ plot_ssf <- function(mod, var) {
   for(i in 1:length(vars)) {
     if(vars[i] != var) {
       # fix to first value
-      new_data[,vars[i]] <- as.numeric(mod$args$data[1, vars[i]])
+      new_data[,vars[i]] <- mod$args$data[1, vars[i]]
     } else {
       # define range of covariate
       range <- range(mod$args$data[, vars[i]], na.rm = TRUE)
@@ -25,6 +25,7 @@ plot_ssf <- function(mod, var) {
 
   # predict SSF over grid
   ssf <- predict_ssf(mod = mod, new_data = new_data)
+  ssf <- apply(ssf, 2, function(col) col / mean(col))
 
   df <- data.frame(var = new_data[[var]],
                    state = paste0("state ", rep(1:mod$args$n_states, each = 1000)),
