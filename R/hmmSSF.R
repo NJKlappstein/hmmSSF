@@ -21,7 +21,7 @@ hmmSSF <- function(ssf_formula,
                    data,
                    ssf_par0,
                    tpm_par0 = NULL,
-                   optim_opts = list(trace = 0, maxit = 5e4)) {
+                   maxit = 1e4) {
 
   # order data
   data <- data[order(data$ID, data$stratum, -data$obs),]
@@ -48,20 +48,33 @@ hmmSSF <- function(ssf_formula,
   sampling_densities <- attr(data, "weights")
 
   # optimise negative log likelihood
-  fit <- optim(par = par,
-               fn = nllk,
-               ssf_MM = ssf_MM,
-               tpm_MM = tpm_MM,
-               sampling_densities = sampling_densities,
-               stratum = data$stratum,
-               ID = data$ID,
-               n_states = n_states,
-               n_obs = nrow(obs),
-               control = optim_opts,
-               hessian = TRUE)
+  #fit <- optim(par = par,
+  #             fn = nllk,
+  #             ssf_MM = ssf_MM,
+  #             tpm_MM = tpm_MM,
+  #             sampling_densities = sampling_densities,
+  #             stratum = data$stratum,
+  #             ID = data$ID,
+  #             n_states = n_states,
+  #             n_obs = nrow(obs),
+  #             control = optim_opts,
+  #             hessian = TRUE)
+
+  fit <- nlm(p = par,
+             f = nllk,
+             ssf_MM = ssf_MM,
+             tpm_MM = tpm_MM,
+             sampling_densities = sampling_densities,
+             stratum = data$stratum,
+             ID = data$ID,
+             n_states = n_states,
+             n_obs = nrow(obs),
+             hessian = TRUE,
+             iterlim = maxit)
 
   # unpack fitted parameters
-  par <-  format_par(par = fit$par, n_states = n_states,
+  par <-  format_par(par = fit$estimate,
+                     n_states = n_states,
                      ssf_cov = colnames(ssf_MM),
                      tpm_cov = colnames(tpm_MM))
 

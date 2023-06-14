@@ -8,7 +8,8 @@ track <- subset(data, obs == 1)
 hb <- raster("inst/zebra/vegetation2.grd")
 
 # generate random locations using new function
-data <- random_locs(obs = track, n_controls = 25, distr = "gamma")
+set.seed(250)
+data <- get_controls(obs = track, n_controls = 25, distr = "gamma")
 
 # add needed covariates
 notNA <-  which(!is.na(data$x))
@@ -28,14 +29,12 @@ ssf_formula <- ~ step + log(step) + cos(angle) + veg
 tpm_formula <- ~ cos(2*pi*tod/24) + sin(2*pi*tod/24)
 
 # fit model
-fit <- fitHMMSSF(ssf_formula = ssf_formula,
-                 tpm_formula = tpm_formula,
-                 data = data,
-                 ssf_par0 = initial_par$betas,
-                 tpm_par0 = initial_par$alphas,
-                 n_states = n_states,
-                 optim_opts = list(trace = 1,
-                                   maxit = 1e4))
+fit <- hmmSSF(ssf_formula = ssf_formula,
+              tpm_formula = tpm_formula,
+              data = data,
+              ssf_par0 = initial_par$betas,
+              tpm_par0 = initial_par$alphas,
+              n_states = n_states)
 fit
 
 
@@ -58,9 +57,9 @@ ssf_df <- data.frame(state = rep(c(1, 2), each = 3),
 
 pd <- position_dodge(0.25)
 ggplot(ssf_df, aes(y = estimate,
-                         x = covariate,
-                         group = state,
-                         color = as.factor(state))) +
+                   x = covariate,
+                   group = state,
+                   color = as.factor(state))) +
   geom_point(position = pd, size = 2) +
   geom_errorbar(aes(ymin = lower, ymax = upper),
                 position = pd,

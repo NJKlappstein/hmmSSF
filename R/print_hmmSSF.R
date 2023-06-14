@@ -6,8 +6,8 @@
 #'
 #' @export
 print.hmmSSF <- function(mod) {
-  cat("Negative log-likelihood:", mod$fit$value, "\n")
-  cat("Convergence code:", mod$fit$convergence, "\n\n")
+  cat("Negative log-likelihood:", mod$fit$minimum, "\n")
+  cat("Convergence code:", mod$fit$code, "\n\n")
 
   # get parameters and 95% confidence intervals
   par <- confint(mod, pretty = TRUE)
