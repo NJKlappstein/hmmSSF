@@ -1,7 +1,9 @@
 
 #' Setup importance sampling distributions
+#'
+#' @importFrom moveHMM prepData
 setup_samp <- function(distr = "uniform", obs) {
-  move_data <- moveHMM::prepData(obs, type = "UTM")
+  move_data <- prepData(obs, type = "UTM")
   step <- na.omit(move_data$step)
   angle <- na.omit(move_data$angle)
 
