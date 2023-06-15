@@ -1,7 +1,7 @@
 #' Calculate CIs for the HMM-SSF parameters via the Hessian matrix
 #' @method confint hmmSSF
 #'
-#' @param mod Fitted model output returned by \code{\link{fitHMMSSF}}
+#' @param mod Fitted model output returned by \code{\link{hmmSSF}}
 #' @param range range of the CIs (default = 0.95)
 #'
 #' @importFrom MASS ginv

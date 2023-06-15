@@ -2,7 +2,7 @@
 #' Forward-backward algorithm
 #' (modified from hmmTMB function 'HMM$forward_backward')
 #'
-#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
+#' @param mod Fitted model object, as returned by \code{\link{hmmSSF}}
 #'
 #' @return List with two elements: \code{log_forward}
 #' (log forward probabilities) and \code{log_backward}

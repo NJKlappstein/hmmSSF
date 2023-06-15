@@ -1,6 +1,6 @@
 #' Predict SSF for new data
 #'
-#' @param mod Fitted model returned by \code{\link{fitHMMSSF}}
+#' @param mod Fitted model returned by \code{\link{hmmSSF}}
 #' @param new_data Data frame with covariate values used for prediction
 #'
 #' @return Matrix of predictions in each state

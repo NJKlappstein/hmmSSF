@@ -2,7 +2,7 @@
 #' Local decoding using the forward-backward algorithm
 #' (modified from hmmTMB function 'HMM$state_probs')
 #'
-#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
+#' @param mod Fitted model object, as returned by \code{\link{hmmSSF}}
 #'
 #' @return Matrix of state probabilities, with one row for each
 #' observation time, and one column for each state. The (i, j)-th

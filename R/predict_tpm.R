@@ -1,7 +1,7 @@
 
 #' Predict transition probabilities (with uncertainty)
 #'
-#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
+#' @param mod Fitted model object, as returned by \code{\link{hmmSSF}}
 #' @param new_data Data frame with covariate values to use for prediction
 #' @param return_CI Logical (default: TRUE). Should confidence intervals be
 #' computed?

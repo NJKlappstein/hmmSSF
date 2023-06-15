@@ -2,7 +2,7 @@
 #' Generate most probable state sequence using the viterbi algorithm
 #' (modified from moveHMM function 'viterbi')
 #'
-#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
+#' @param mod Fitted model object, as returned by \code{\link{hmmSSF}}
 #'
 #' @export
 

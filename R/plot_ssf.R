@@ -1,6 +1,6 @@
 #' Plot RSS
 #'
-#' @param mod Fitted model returned by \code{\link{fitHMMSSF}}
+#' @param mod Fitted model returned by \code{\link{hmmSSF}}
 #' @param var Name of variable to plot SSF against
 #'
 #' @export
