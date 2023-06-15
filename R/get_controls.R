@@ -22,7 +22,7 @@ get_controls <- function(obs,
   data_all <- NULL
   for(id in unique(obs$ID)) {
     # Subset to this ID
-    sub_obs <- subset(obs, ID == id)
+    sub_obs <- subset(obs, obs$ID == id)
 
     # Matrix of locations
     xy <- as.matrix(sub_obs[, c("x", "y")])

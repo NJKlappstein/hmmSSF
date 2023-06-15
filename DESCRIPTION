@@ -4,7 +4,7 @@ Title: State-switching step selection functions
 Version: 0.1.0
 Author: NJ Klappstein, T Michelot
 Maintainer: NJ Klappstein <nklappstein@dal.ca>
-Description: Fit state-switching step selection functions to animal movement data
+Description: Fit state-switching step selection functions to animal movement data.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -12,9 +12,10 @@ Imports:
   moveHMM,
   MASS,
   CircStats,
-  numDeriv
-Depends:
-  Rcpp
+  numDeriv,
+  ggplot2,
+  Rcpp,
+  terra
 LinkingTo:
   Rcpp, 
   RcppArmadillo

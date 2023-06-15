@@ -1,5 +1,7 @@
 
 #' Log-sum-exp utility function
+#'
+#' @param x Argument
 logsumexp <- function(x) {
   xmax <- max(x)
   val <- xmax + log(sum(exp(x - xmax)))
@@ -7,6 +9,8 @@ logsumexp <- function(x) {
 }
 
 #' Shift angles to be between -pi and pi
+#'
+#' @param angles Vector of angles
 shift_angle <- function(angles) {
   angles[which(angles < -pi)] <- angles[which(angles < -pi)] + 2 * pi
   angles[which(angles > pi)] <- angles[which(angles > pi)] - 2 * pi
@@ -14,6 +18,13 @@ shift_angle <- function(angles) {
 }
 
 #' Simulate raster
+#'
+#' @param rho Correlation parameter
+#' @param lim Limits of raster
+#' @param res Resolution
+#'
+#' @importFrom terra rast focal ncell
+#' @importFrom stats rnorm
 #'
 #' @export
 sim_raster <- function(rho = 11, lim = c(-30, 30, -30, 30), res = 1) {

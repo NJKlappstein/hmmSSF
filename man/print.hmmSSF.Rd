@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{Fitted model object, as returned by \code{\link{hmmSSF}}}
+
+\item{...}{Unused argument needed for compatibility with generic S3 method}
 }
 \description{
 Print method for hmmSSF model objects

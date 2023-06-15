@@ -7,6 +7,7 @@
 #' @importFrom moveHMM prepData
 #' @importFrom CircStats rvm dvm rwrpcauchy dwrpcauchy vm.ml
 #' wrpcauchy.ml
+#' @importFrom stats runif rgamma dgamma rexp dexp sd
 setup_samp <- function(distr = "uniform", obs) {
   move_data <- prepData(obs, type = "UTM")
   step <- na.omit(move_data$step)

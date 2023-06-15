@@ -6,6 +6,13 @@
 \usage{
 sim_raster(rho = 11, lim = c(-30, 30, -30, 30), res = 1)
 }
+\arguments{
+\item{rho}{Correlation parameter}
+
+\item{lim}{Limits of raster}
+
+\item{res}{Resolution}
+}
 \description{
 Simulate raster
 }

@@ -6,6 +6,9 @@
 \usage{
 shift_angle(angles)
 }
+\arguments{
+\item{angles}{Vector of angles}
+}
 \description{
 Shift angles to be between -pi and pi
 }

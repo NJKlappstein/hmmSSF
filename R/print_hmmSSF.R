@@ -3,6 +3,9 @@
 #' @method print hmmSSF
 #'
 #' @param x Fitted model object, as returned by \code{\link{hmmSSF}}
+#' @param ... Unused argument needed for compatibility with generic S3 method
+#'
+#' @importFrom stats confint
 #'
 #' @export
 print.hmmSSF <- function(x, ...) {

@@ -6,6 +6,9 @@
 \usage{
 logsumexp(x)
 }
+\arguments{
+\item{x}{Argument}
+}
 \description{
 Log-sum-exp utility function
 }

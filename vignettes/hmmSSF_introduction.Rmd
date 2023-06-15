@@ -11,6 +11,10 @@ output:
 header-includes: \renewcommand{\baselinestretch}{1.2}
 fontsize: 12pt
 bibliography: refs.bib
+vignette: >
+  %\VignetteIndexEntry{Introduction to hmmSSF}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r setup, include = FALSE}

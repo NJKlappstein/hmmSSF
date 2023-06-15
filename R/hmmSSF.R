@@ -12,6 +12,8 @@
 #' intercepts) and one column for each off-diagonal transition probability.
 #' @param maxit the max number of iterations that the optimiser should run for (default = 1e3)
 #'
+#' @importFrom stats nlm
+#'
 #' @export
 #'
 #' @useDynLib hmmSSF

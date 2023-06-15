@@ -8,6 +8,7 @@
 #' as a list with elements for ssf and tpm.
 #'
 #' @importFrom MASS ginv
+#' @importFrom stats qnorm
 #'
 #' @export
 
