@@ -8,6 +8,9 @@ Description: Fit state-switching step selection functions to animal movement dat
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+  moveHMM,
+  MASS
 Depends:
   Rcpp
 LinkingTo:
