@@ -2,6 +2,8 @@
 #' Setup importance sampling distributions
 #'
 #' @importFrom moveHMM prepData
+#' @importFrom CircStats rvm dvm rwrpcauchy dwrpcauchy vm.ml
+#' wrpcauchy.ml
 setup_samp <- function(distr = "uniform", obs) {
   move_data <- prepData(obs, type = "UTM")
   step <- na.omit(move_data$step)
@@ -45,20 +47,20 @@ setup_samp <- function(distr = "uniform", obs) {
     par_angle <- NA
   } else if(length(distr) == 2) {
     if(distr[2] == "vm") {
-      par_angle <- unlist(CircStats::vm.ml(angle))
+      par_angle <- unlist(vm.ml(angle))
       r_angle <- function(n, par) {
-        CircStats::rvm(n = n, mean = par[1], k = par[2])
+        rvm(n = n, mean = par[1], k = par[2])
       }
       d_angle <- function(x, par) {
-        CircStats::dvm(theta = x, mu = par[1], kappa = par[2])
+        dvm(theta = x, mu = par[1], kappa = par[2])
       }
     } else if(distr[2] == "wrpcauchy") {
-      par_angle <- unlist(CircStats::wrpcauchy.ml(angle, mu0 = 0, rho0 = 0.5))
+      par_angle <- unlist(wrpcauchy.ml(angle, mu0 = 0, rho0 = 0.5))
       r_angle <- function(n, par) {
-        CircStats::rwrpcauchy(n = n, location = par[1], rho = par[2])
+        rwrpcauchy(n = n, location = par[1], rho = par[2])
       }
       d_angle <- function(x, par) {
-        CircStats::dwrpcauchy(theta = x, mu = par[1], rho = par[2])
+        dwrpcauchy(theta = x, mu = par[1], rho = par[2])
       }
     } else {
       stop("'distr' is not implemented")

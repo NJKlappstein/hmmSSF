@@ -4,10 +4,10 @@
 \alias{print.hmmSSF}
 \title{Print method for hmmSSF model objects}
 \usage{
-\method{print}{hmmSSF}(mod)
+\method{print}{hmmSSF}(x, ...)
 }
 \arguments{
-\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
+\item{x}{Fitted model object, as returned by \code{\link{hmmSSF}}}
 }
 \description{
 Print method for hmmSSF model objects

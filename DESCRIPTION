@@ -10,7 +10,9 @@ Encoding: UTF-8
 LazyData: true
 Imports:
   moveHMM,
-  MASS
+  MASS,
+  CircStats,
+  numDeriv
 Depends:
   Rcpp
 LinkingTo:

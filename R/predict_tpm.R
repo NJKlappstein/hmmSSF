@@ -10,6 +10,8 @@
 #' Each element is an array, where each layer is a transition
 #' probability matrix corresponding to a row of 'new_data'.
 #'
+#' @importFrom numDeriv grad
+#'
 #' @export
 
 predict_tpm <- function(mod,
@@ -55,9 +57,9 @@ predict_tpm <- function(mod,
       for(j in 1:n_states) {
         # derive confidence intervals using the delta method
         dN <- t(apply(tpm_MM, 1, function(x)
-          numDeriv::grad(get_gamma, tpm_par,
-                         modmat = matrix(x, nrow = 1),
-                         n_states = n_states, i = i, j = j)))
+          grad(get_gamma, tpm_par,
+               modmat = matrix(x, nrow = 1),
+               n_states = n_states, i = i, j = j)))
 
         se <- t(apply(dN, 1, function(x)
           suppressWarnings(sqrt(x %*% Sigma %*% x))))
