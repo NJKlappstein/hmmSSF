@@ -11,7 +11,7 @@ hmmSSF(
   data,
   ssf_par0,
   tpm_par0 = NULL,
-  optim_opts = list(trace = 0, maxit = 50000)
+  maxit = 10000
 )
 }
 \arguments{
