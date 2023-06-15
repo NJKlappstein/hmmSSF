@@ -15,13 +15,13 @@ nllk(par, ssf_MM, tpm_MM, ID, stratum, n_states, sampling_densities, n_obs)
 
 \item{ID}{track ID from data}
 
+\item{stratum}{stratum ID from data}
+
 \item{n_states}{number of states in the HMM}
 
 \item{sampling_densities}{dens of the controls for given sampling distribution}
 
 \item{n_obs}{number of observed locations in the data}
-
-\item{statum}{stratum ID from data}
 }
 \description{
 Negative log likelihood of the HMM-SSF (estimated with forward algorithm)

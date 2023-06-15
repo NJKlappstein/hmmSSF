@@ -8,7 +8,7 @@
 local_decoding(mod)
 }
 \arguments{
-\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
+\item{mod}{Fitted model object, as returned by \code{\link{hmmSSF}}}
 }
 \value{
 Matrix of state probabilities, with one row for each

@@ -11,11 +11,13 @@ hmmSSF(
   data,
   ssf_par0,
   tpm_par0 = NULL,
-  maxit = 10000
+  maxit = 1000
 )
 }
 \arguments{
 \item{ssf_formula}{Model formula for ssf}
+
+\item{tpm_formula}{Formula for transition probabilities (default = ~1)}
 
 \item{n_states}{Number of HMM states}
 
@@ -29,7 +31,7 @@ for each covariate and one column for each HMM state.}
 parameters, with one row for each covariate (including the first row for
 intercepts) and one column for each off-diagonal transition probability.}
 
-\item{tmp_formula}{Formula for transition probabilities (default = ~1)}
+\item{maxit}{the max number of iterations that the optimiser should run for (default = 1e3)}
 }
 \description{
 Fit the HMM-SSF

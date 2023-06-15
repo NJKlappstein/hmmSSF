@@ -10,6 +10,8 @@
 #' Each element is an array, where each layer is a transition
 #' probability matrix corresponding to a row of 'new_data'.
 #'
+#' @importFrom stats model.matrix plogis qlogis
+#'
 #' @export
 
 predict_delta <- function(mod,

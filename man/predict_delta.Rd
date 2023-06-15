@@ -7,7 +7,7 @@
 predict_delta(mod, new_data, return_CI = TRUE)
 }
 \arguments{
-\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
+\item{mod}{Fitted model object, as returned by \code{\link{hmmSSF}}}
 
 \item{new_data}{Data frame with covariate values to use for prediction}
 

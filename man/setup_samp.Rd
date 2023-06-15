@@ -6,6 +6,11 @@
 \usage{
 setup_samp(distr = "uniform", obs)
 }
+\arguments{
+\item{distr}{movement distributions for sampling (see get_controls for details)}
+
+\item{obs}{data frame with observed locations (ID, x, y, time)}
+}
 \description{
 Setup importance sampling distributions
 }

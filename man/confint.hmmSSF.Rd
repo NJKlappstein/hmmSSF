@@ -7,9 +7,13 @@
 \method{confint}{hmmSSF}(mod, range = 0.95, pretty = FALSE)
 }
 \arguments{
-\item{mod}{Fitted model output returned by \code{\link{fitHMMSSF}}}
+\item{mod}{Fitted model output returned by \code{\link{hmmSSF}}}
 
 \item{range}{range of the CIs (default = 0.95)}
+
+\item{pretty}{controls how the CIs are stored. If set to TRUE, the CIs will
+be stored as they appear in the printed model. Otherwise, they are stored
+as a list with elements for ssf and tpm.}
 }
 \description{
 Calculate CIs for the HMM-SSF parameters via the Hessian matrix

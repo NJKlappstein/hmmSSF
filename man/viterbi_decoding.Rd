@@ -8,7 +8,7 @@
 viterbi_decoding(mod)
 }
 \arguments{
-\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
+\item{mod}{Fitted model object, as returned by \code{\link{hmmSSF}}}
 }
 \description{
 Generate most probable state sequence using the viterbi algorithm

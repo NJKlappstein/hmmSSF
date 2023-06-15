@@ -7,7 +7,7 @@
 plot_ssf(mod, var)
 }
 \arguments{
-\item{mod}{Fitted model returned by \code{\link{fitHMMSSF}}}
+\item{mod}{Fitted model returned by \code{\link{hmmSSF}}}
 
 \item{var}{Name of variable to plot SSF against}
 }

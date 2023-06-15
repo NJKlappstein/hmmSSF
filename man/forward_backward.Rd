@@ -8,7 +8,7 @@
 forward_backward(mod)
 }
 \arguments{
-\item{mod}{Fitted model object, as returned by \code{\link{fitHMMSSF}}}
+\item{mod}{Fitted model object, as returned by \code{\link{hmmSSF}}}
 }
 \value{
 List with two elements: \code{log_forward}

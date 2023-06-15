@@ -7,7 +7,7 @@
 predict_ssf(mod, new_data)
 }
 \arguments{
-\item{mod}{Fitted model returned by \code{\link{fitHMMSSF}}}
+\item{mod}{Fitted model returned by \code{\link{hmmSSF}}}
 
 \item{new_data}{Data frame with covariate values used for prediction}
 }

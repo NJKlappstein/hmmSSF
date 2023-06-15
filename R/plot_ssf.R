@@ -3,6 +3,8 @@
 #' @param mod Fitted model returned by \code{\link{hmmSSF}}
 #' @param var Name of variable to plot SSF against
 #'
+#' @importFrom ggplot2 ggplot geom_line facet_wrap labs aes
+#'
 #' @export
 
 plot_ssf <- function(mod, var) {
