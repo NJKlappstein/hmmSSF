@@ -2,10 +2,11 @@
 #' Print method for hmmSSF model objects
 #' @method print hmmSSF
 #'
-#' @param mod Fitted model object, as returned by \code{\link{fitHMMSSF}}
+#' @param x Fitted model object, as returned by \code{\link{hmmSSF}}
 #'
 #' @export
-print.hmmSSF <- function(mod) {
+print.hmmSSF <- function(x, ...) {
+  mod <- x
   cat("Negative log-likelihood:", mod$fit$minimum, "\n")
   cat("Convergence code:", mod$fit$code, "\n\n")
 
