@@ -1,6 +1,9 @@
 
 #' Setup importance sampling distributions
 #'
+#' @param distr movement distributions for sampling (see get_controls for details)
+#' @param obs data frame with observed locations (ID, x, y, time)
+#'
 #' @importFrom moveHMM prepData
 #' @importFrom CircStats rvm dvm rwrpcauchy dwrpcauchy vm.ml
 #' wrpcauchy.ml

@@ -4,7 +4,7 @@
 #' @param ssf_MM model matrix based on SSF formula
 #' @param tpm_MM model matrix based on transition probability formula
 #' @param ID track ID from data
-#' @param statum stratum ID from data
+#' @param stratum stratum ID from data
 #' @param n_states number of states in the HMM
 #' @param sampling_densities dens of the controls for given sampling distribution
 #' @param n_obs number of observed locations in the data

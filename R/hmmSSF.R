@@ -1,7 +1,7 @@
 #' Fit the HMM-SSF
 #'
 #' @param ssf_formula Model formula for ssf
-#' @param tmp_formula Formula for transition probabilities (default = ~1)
+#' @param tpm_formula Formula for transition probabilities (default = ~1)
 #' @param n_states Number of HMM states
 #' @param data Data frame with named columns for ID, stratum, obs, and
 #' covariates in ssf_formula
@@ -10,6 +10,7 @@
 #' @param tpm_par0 Matrix of starting values for transition probability
 #' parameters, with one row for each covariate (including the first row for
 #' intercepts) and one column for each off-diagonal transition probability.
+#' @param maxit the max number of iterations that the optimiser should run for (default = 1e3)
 #'
 #' @export
 #'
@@ -21,7 +22,7 @@ hmmSSF <- function(ssf_formula,
                    data,
                    ssf_par0,
                    tpm_par0 = NULL,
-                   maxit = 1e4) {
+                   maxit = 1e3) {
 
   # order data
   data <- data[order(data$ID, data$stratum, -data$obs),]
@@ -48,18 +49,6 @@ hmmSSF <- function(ssf_formula,
   sampling_densities <- attr(data, "weights")
 
   # optimise negative log likelihood
-  #fit <- optim(par = par,
-  #             fn = nllk,
-  #             ssf_MM = ssf_MM,
-  #             tpm_MM = tpm_MM,
-  #             sampling_densities = sampling_densities,
-  #             stratum = data$stratum,
-  #             ID = data$ID,
-  #             n_states = n_states,
-  #             n_obs = nrow(obs),
-  #             control = optim_opts,
-  #             hessian = TRUE)
-
   fit <- nlm(p = par,
              f = nllk,
              ssf_MM = ssf_MM,

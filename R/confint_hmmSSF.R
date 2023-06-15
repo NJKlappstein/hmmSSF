@@ -3,6 +3,9 @@
 #'
 #' @param mod Fitted model output returned by \code{\link{hmmSSF}}
 #' @param range range of the CIs (default = 0.95)
+#' @param pretty controls how the CIs are stored. If set to TRUE, the CIs will
+#' be stored as they appear in the printed model. Otherwise, they are stored
+#' as a list with elements for ssf and tpm.
 #'
 #' @importFrom MASS ginv
 #'

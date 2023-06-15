@@ -54,8 +54,8 @@ forward_backward <- function(mod) {
   delta <- solve(t(diag(n_states) - Gamma[,,1] + 1), rep(1, n_states))
 
   # initialise log-forward/backward probabilities
-  log_forward <- matrix(0, nrow = n_states, nc = n_obs)
-  log_backward <- matrix(0, nrow = n_states, nc = n_obs)
+  log_forward <- matrix(0, nrow = n_states, ncol = n_obs)
+  log_backward <- matrix(0, nrow = n_states, ncol = n_obs)
 
   # loop over ID (tracks)
   k <- 1
