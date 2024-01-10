@@ -21,7 +21,7 @@ confint.hmmSSF <- function(mod, range = 0.95, pretty = FALSE) {
   quant <- qnorm(1 - (1 - range) / 2)
 
   # compute lower and upper bounds
-  mle <- mod$fit$estimate
+  mle <- mod$fit$par
   low <- mle - quant * sqrt(var)
   upp <- mle + quant * sqrt(var)
 

@@ -66,8 +66,8 @@ get_controls <- function(obs,
   }
 
   # Save importance weights as attributes and remove column
-  attr(data_all, "weights") <- data_all$w
-  data_all$w <- NULL
+  #attr(data_all, "weights") <- data_all$w
+  #data_all$w <- NULL
 
   return(data_all)
 }

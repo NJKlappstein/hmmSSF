@@ -10,9 +10,10 @@
 #' @param tpm_par0 Matrix of starting values for transition probability
 #' parameters, with one row for each covariate (including the first row for
 #' intercepts) and one column for each off-diagonal transition probability.
-#' @param maxit the max number of iterations that the optimiser should run for (default = 1e3)
+#' @param method optimisation method used in optim (by default "Nelder-Mead)
+#' but can also take any other option available in optim
 #'
-#' @importFrom stats nlm
+#' @importFrom stats optim
 #'
 #' @export
 #'
@@ -24,7 +25,8 @@ hmmSSF <- function(ssf_formula,
                    data,
                    ssf_par0,
                    tpm_par0 = NULL,
-                   maxit = 1e3) {
+                   optim_opts = list(trace = 0, maxit = 5e4),
+                   method = "Nelder-Mead") {
 
   # order data
   data <- data[order(data$ID, data$stratum, -data$obs),]
@@ -48,23 +50,25 @@ hmmSSF <- function(ssf_formula,
   par <- c(ssf_par0, tpm_par0)
 
   # get sampling densities for correction
-  sampling_densities <- attr(data, "weights")
+  #sampling_densities <- attr(data, "weights")
+  sampling_densities <- data$w
 
   # optimise negative log likelihood
-  fit <- nlm(p = par,
-             f = nllk,
-             ssf_MM = ssf_MM,
-             tpm_MM = tpm_MM,
-             sampling_densities = sampling_densities,
-             stratum = data$stratum,
-             ID = data$ID,
-             n_states = n_states,
-             n_obs = nrow(obs),
-             hessian = TRUE,
-             iterlim = maxit)
+  fit <- optim(par = par,
+               fn = nllk,
+               ssf_MM = ssf_MM,
+               tpm_MM = tpm_MM,
+               sampling_densities = sampling_densities,
+               stratum = data$stratum,
+               ID = data$ID,
+               n_states = n_states,
+               n_obs = nrow(obs),
+               control = optim_opts,
+               hessian = TRUE,
+               method = method)
 
   # unpack fitted parameters
-  par <-  format_par(par = fit$estimate,
+  par <-  format_par(par = fit$par,
                      n_states = n_states,
                      ssf_cov = colnames(ssf_MM),
                      tpm_cov = colnames(tpm_MM))
