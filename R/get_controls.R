@@ -50,24 +50,20 @@ get_controls <- function(obs,
         sim_step * cbind(cos(sim_bear), sin(sim_bear))
 
       data.frame(ID = id,
-                 stratum = i,
+                 stratum = factor(paste(id, i, sep = "-")),
                  obs = c(1, rep(0, n_controls)),
                  x = c(xy[i,1], pts[,1]),
                  y = c(xy[i,2], pts[,2]),
-                 step = c(steps[i-1], sim_step),
-                 angle = c(angles[i-2], sim_angle),
                  time = as.POSIXct(sub_obs$time[i],
                                    tz = attr(sub_obs$time, "tzone")),
+                 step = c(steps[i-1], sim_step),
+                 angle = c(angles[i-2], sim_angle),
                  w = c(weight_obs, weights))
     })
 
     # Add data for this ID to data frame
     data_all <- rbind(data_all, do.call(rbind, data_list))
   }
-
-  # Save importance weights as attributes and remove column
-  #attr(data_all, "weights") <- data_all$w
-  #data_all$w <- NULL
 
   return(data_all)
 }
