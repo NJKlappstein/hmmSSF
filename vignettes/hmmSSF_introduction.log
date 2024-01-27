@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.2)  11 JAN 2024 14:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.2)  27 JAN 2024 08:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-1
-06254e5ff3e2.dir/hmmSSF_introduction.tex
+**/private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-6
+2b664fb5c8d.dir/hmmSSF_introduction.tex
 
-(/private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction.tex
+(/private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex
 /base/article.cls
@@ -528,25 +528,25 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf, id=44, 
-397.485pt x 349.305pt>
-File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previ
-ew-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf Gra
-phic file (type pdf)
-<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf>
+</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf, id=44, 3
+97.485pt x 349.305pt>
+File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previ
+ew-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf Grap
+hic file (type pdf)
+<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf>
 Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
-/T/RtmplrhvAs/preview-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/
-plot-data-1.pdf  used on input line 166.
+/T/RtmpJlS5vX/preview-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/p
+lot-data-1.pdf  used on input line 166.
 (pdftex.def)             Requested size: 281.86455pt x 247.69914pt.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
 81.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [2] [3 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/p
-review-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf
->]
+) [2] [3 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/p
+review-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-data-1.pdf>
+]
 Overfull \hbox (18.07022pt too wide) in paragraph at lines 284--284
 []  \T1/lmtt/m/n/12 ID stratum obs        x          y                time     
   step       angle[] 
@@ -591,93 +591,93 @@ Overfull \hbox (18.0282pt too wide) in paragraph at lines 284--284
 [4] [5]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 339.
-</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pdf, id
-=101, 351.3125pt x 206.7725pt>
-File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previ
-ew-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pd
-f Graphic file (type pdf)
-<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pdf
->
+</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pdf, id=
+101, 351.3125pt x 206.7725pt>
+File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previ
+ew-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pdf
+ Graphic file (type pdf)
+<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pdf>
+
 Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
-/T/RtmplrhvAs/preview-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/
-plot-step-hist-1.pdf  used on input line 373.
+/T/RtmpJlS5vX/preview-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/p
+lot-step-hist-1.pdf  used on input line 373.
 (pdftex.def)             Requested size: 281.8759pt x 165.9041pt.
-[6 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview
--106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pdf>
-] [7]
-</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf, id=129,
- 423.5825pt x 206.7725pt>
-File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previ
-ew-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf Gra
-phic file (type pdf)
-<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf>
+[6 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview
+-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-hist-1.pdf>]
+[7]
+</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf, id=129, 
+423.5825pt x 206.7725pt>
+File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previ
+ew-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf Grap
+hic file (type pdf)
+<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf>
 Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
-/T/RtmplrhvAs/preview-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/
-plot-step-1.pdf  used on input line 477.
+/T/RtmpJlS5vX/preview-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/p
+lot-step-1.pdf  used on input line 477.
 (pdftex.def)             Requested size: 422.79294pt x 206.38705pt.
 [8]
-</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf, id=135
-, 423.5825pt x 206.7725pt>
-File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previ
-ew-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf Gr
-aphic file (type pdf)
-<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf>
-Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
-/T/RtmplrhvAs/preview-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/
-plot-angle-1.pdf  used on input line 491.
-(pdftex.def)             Requested size: 422.79294pt x 206.38705pt.
-</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf, id=136,
- 423.5825pt x 204.765pt>
-File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previ
-ew-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf Gra
+</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf, id=135,
+ 423.5825pt x 206.7725pt>
+File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previ
+ew-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf Gra
 phic file (type pdf)
-<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf>
+<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf>
 Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
-/T/RtmplrhvAs/preview-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/
-plot-cov1-1.pdf  used on input line 504.
+/T/RtmpJlS5vX/preview-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/p
+lot-angle-1.pdf  used on input line 491.
+(pdftex.def)             Requested size: 422.79294pt x 206.38705pt.
+</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf, id=136, 
+423.5825pt x 204.765pt>
+File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previ
+ew-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf Grap
+hic file (type pdf)
+<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf>
+Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
+/T/RtmpJlS5vX/preview-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/p
+lot-cov1-1.pdf  used on input line 504.
 (pdftex.def)             Requested size: 422.79294pt x 204.38329pt.
-[9 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview
--106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf> </pr
-ivate/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-106254
-e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf>]
-</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf, id=156, 271.0
-125pt x 349.305pt>
-File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previ
-ew-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf Graphic f
-ile (type pdf)
-<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf>
+[9 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview
+-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-step-1.pdf> </pri
+vate/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62b664f
+b5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-angle-1.pdf>]
+</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf, id=156, 271.01
+25pt x 349.305pt>
+File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previ
+ew-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf Graphic fi
+le (type pdf)
+<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf>
 Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
-/T/RtmplrhvAs/preview-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/
-vit-1.pdf  used on input line 528.
+/T/RtmpJlS5vX/preview-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/v
+it-1.pdf  used on input line 528.
 (pdftex.def)             Requested size: 234.88573pt x 302.74162pt.
-[10 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf>] [1
-1 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-
-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf>] [12]
-</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/preview-10
-6254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf, id=1
-89, 568.1225pt x 279.0425pt>
-File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previ
-ew-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf 
-Graphic file (type pdf)
-<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf>
+[10 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/plot-cov1-1.pdf>] [11
+ </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-6
+2b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/vit-1.pdf>] [12]
+</private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/preview-62
+b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf, id=18
+9, 568.1225pt x 279.0425pt>
+File: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previ
+ew-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf G
+raphic file (type pdf)
+<use /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf>
 Package pdftex.def Info: /private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn
-/T/RtmplrhvAs/preview-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/
-tpm-mod-pred-1.pdf  used on input line 633.
+/T/RtmpJlS5vX/preview-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/t
+pm-mod-pred-1.pdf  used on input line 633.
 (pdftex.def)             Requested size: 469.7731pt x 230.7366pt.
-[13 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmplrhvAs/previe
-w-106254e5ff3e2.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf>]
+[13 </private/var/folders/5k/gmthxh7j5hlb9hnvwqjfn3dh0000gn/T/RtmpJlS5vX/previe
+w-62b664fb5c8d.dir/hmmSSF_introduction_files/figure-latex/tpm-mod-pred-1.pdf>] 
 (./hmmSSF_introduction.bbl) [14] (./hmmSSF_introduction.aux)
 
 LaTeX Warning: There were multiply-defined labels.
@@ -685,12 +685,12 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  14258 strings out of 478268
- 233284 string characters out of 5846347
+ 233224 string characters out of 5846347
  557248 words of memory out of 5000000
  32057 multiletter control sequences out of 15000+600000
  526521 words of font info for 137 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,6n,77p,1110b,488s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,6n,77p,1109b,488s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
 texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/t
 exmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2022/texmf-dist/
@@ -705,7 +705,7 @@ e1/public/lm/lmri12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/
 lm/lmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtk10.
 pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/
 local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on hmmSSF_introduction.pdf (14 pages, 652044 bytes).
+Output written on hmmSSF_introduction.pdf (14 pages, 652027 bytes).
 PDF statistics:
  314 PDF objects out of 1000 (max. 8388607)
  248 compressed objects within 3 object streams
