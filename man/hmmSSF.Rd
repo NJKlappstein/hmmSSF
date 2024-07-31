@@ -11,7 +11,8 @@ hmmSSF(
   data,
   ssf_par0,
   tpm_par0 = NULL,
-  maxit = 1000
+  optim_opts = list(trace = 0, maxit = 50000),
+  method = "Nelder-Mead"
 )
 }
 \arguments{
@@ -31,7 +32,11 @@ for each covariate and one column for each HMM state.}
 parameters, with one row for each covariate (including the first row for
 intercepts) and one column for each off-diagonal transition probability.}
 
-\item{maxit}{the max number of iterations that the optimiser should run for (default = 1e3)}
+\item{optim_opts}{Additional options to be passed to optim, as a named list
+(e.g., maxit, trace)}
+
+\item{method}{Optimisation method used in optim (by default "Nelder-Mead)
+but can also take any other option available in optim}
 }
 \description{
 Fit the HMM-SSF

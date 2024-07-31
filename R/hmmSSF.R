@@ -10,8 +10,10 @@
 #' @param tpm_par0 Matrix of starting values for transition probability
 #' parameters, with one row for each covariate (including the first row for
 #' intercepts) and one column for each off-diagonal transition probability.
-#' @param method optimisation method used in optim (by default "Nelder-Mead)
+#' @param method Optimisation method used in optim (by default "Nelder-Mead)
 #' but can also take any other option available in optim
+#' @param optim_opts Additional options to be passed to optim, as a named list
+#' (e.g., maxit, trace)
 #'
 #' @importFrom stats optim
 #'
