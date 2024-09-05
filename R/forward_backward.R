@@ -33,7 +33,7 @@ forward_backward <- function(mod) {
   ssf_LP <- ssf_MM %*% ssf_par
 
   # get sampling densities
-  sampling_densities <- attr(data, "weights")
+  sampling_densities <- data$w
 
   # get state-dependent densities
   densities <- state_dens_rcpp(linear_pred = ssf_LP,
