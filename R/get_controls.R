@@ -27,7 +27,6 @@ get_controls <- function(obs,
     # Matrix of locations
     xy <- as.matrix(sub_obs[, c("x", "y")])
     n_obs <- nrow(xy)
-    n_chars <- nchar(n_obs) # for padding with leading 0s
 
     # Get a few movement metrics
     steps <- sqrt(rowSums((xy[-1,] - xy[-n_obs,])^2))
@@ -51,7 +50,7 @@ get_controls <- function(obs,
         sim_step * cbind(cos(sim_bear), sin(sim_bear))
 
       data.frame(ID = id,
-                 stratum = factor(paste(id, formatC(i, width=nchars, flag = "0"), sep = "-")),
+                 stratum = factor(paste(id, formatC(i, width=nchar(n_obs), flag = "0"), sep = "-")),
                  obs = c(1, rep(0, n_controls)),
                  x = c(xy[i,1], pts[,1]),
                  y = c(xy[i,2], pts[,2]),
