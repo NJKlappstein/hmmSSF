@@ -54,7 +54,7 @@ nllk <- function(par,
     v <- delta * densities[1,]
 
     # Loop over observations for this track
-    for(i in which(obs_ID == unique(ID[k]))) {
+    for(i in which(obs_ID == unique(ID)[k])) {
       v <- v %*% Gamma[,,i] * densities[i,]
       llk <- llk + log(sum(v))
       v <- v/sum(v)
