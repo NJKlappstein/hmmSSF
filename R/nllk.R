@@ -46,16 +46,19 @@ nllk <- function(par,
 
   ## Run forward algorithm looped over track ID
   llk <- 0
-  n_ID <- length(unique(ID)) # track names
   obs_ID <- ID[c(1, which(stratum[-1] != stratum[-length(stratum)])+1)]
+  unique_ID <- unique(ID)
+  n_ID <- length(unique_ID)
 
   for(k in 1:n_ID) {
+    ind <- which(obs_ID == unique_ID[k])
+
     # get initial density for this track
     v <- delta * densities[1,]
 
     # Loop over observations for this track
-    for(i in which(obs_ID == unique(ID)[k])) {
-      v <- v %*% Gamma[,,i] * densities[i,]
+    for(i in ind[-length(ind)]) {
+      v <- v %*% Gamma[,,i] * densities[i+1,]
       llk <- llk + log(sum(v))
       v <- v/sum(v)
     }
