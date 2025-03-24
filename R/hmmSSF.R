@@ -30,8 +30,6 @@ hmmSSF <- function(ssf_formula,
                    optim_opts = list(trace = 0, maxit = 5e4),
                    method = "Nelder-Mead") {
 
-  # order data
-  data <- data[order(data$ID, data$stratum, -data$obs),]
   obs <- subset(data, obs == 1)
 
   # get ssf model matrix (without intercept)
