@@ -50,7 +50,7 @@ get_controls <- function(obs,
         sim_step * cbind(cos(sim_bear), sin(sim_bear))
 
       data.frame(ID = id,
-                 stratum = factor(paste(id, i, sep = "-")),
+                 stratum = factor(paste(id, formatC(i, width=nchar(n_obs), flag = "0"), sep = "-")),
                  obs = c(1, rep(0, n_controls)),
                  x = c(xy[i,1], pts[,1]),
                  y = c(xy[i,2], pts[,2]),
