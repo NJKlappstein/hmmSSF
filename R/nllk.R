@@ -54,7 +54,7 @@ nllk <- function(par,
     ind <- which(obs_ID == unique_ID[k])
 
     # get initial density for this track
-    v <- delta * densities[1,]
+    v <- delta * densities[ind[1],]
 
     # Loop over observations for this track
     for(i in ind[-length(ind)]) {
